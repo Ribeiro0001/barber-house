@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barber House</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/dados.js" defer></script>
+    <script src="js/agendamento.js" defer></script>
+  </head>
+  <body>
+    <header class="cabecalho">
+      <a href="index.html" class="logo">Barber House</a>
+      <nav class="menu">
+        <a href="agenda.html">Área da barbearia</a>
+      </nav>
+    </header>
+    <main class="pagina-agendamento">
+      <section class="apresentacao">
+        <p class="destaque">AGENDAMENTO ONLINE</p>
+        <h1>Seu horário, sem enrolação.</h1>
+        <p class="descricao">
+          Escolha o serviço, o barbeiro e o melhor horário para você.
+        </p>
+        <ul>
+          <li>Agendamento rápido</li>
+          <li>Três barbeiros disponíveis</li>
+          <li>Atendimento avulso ou pelo plano</li>
+        </ul>
+      </section>
+
+      <section class="card-agendamento">
+        <div class="titulo-formulario">
+          <p>NOVO HORÁRIO</p>
+          <h2>Faça seu agendamento</h2>
+        </div>
+        <form id="form-agendamento">
+          <div class="campo campo-completo">
+            <label for="nome">Seu nome</label>
+            <input
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Seu nome"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="campo campo-completo">
+            <label for="telefone">WhatsApp</label>
+            <input
+              type="tel"
+              name="telefone"
+              id="telefone"
+              placeholder="(22) 99999-9999"
+              required
+              autocomplete="tel"
+            />
+          </div>
+          <div class="campo">
+            <label for="categoria">Tipo de atendimento:</label>
+            <select name="categoria" id="categoria" required>
+              <option value="">Selecione</option>
+              <option value="avulso">Atendimento avulso</option>
+              <option value="plano">Cliente de plano</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="servico">Serviço</label>
+            <select name="servico" id="servico" required>
+              <option value="">Selecione o serviço</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="barbeiro">Barbeiro</label>
+            <select name="barbeiro" id="barbeiro" required>
+              <option value="">Selecione o barbeiro</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required />
+          </div>
+          <div class="campo campo-completo">
+            <label for="horario">Horário</label>
+            <select name="horario" id="horario" required>
+              <option value="">Selecione o horário</option>
+            </select>
+          </div>
+          <button type="submit">Confirmar agendamento</button>
+          <p
+            id="mensagem-formulario"
+            class="mensagem-formulario"
+            aria-live="polite"
+          ></p>
+        </form>
+      </section>
+      <section class="planos" id="planos">
+        <div class="cabecalho-planos">
+          <p class="destaque">PLANOS MENSAIS</p>
+          <h2>Corte sempre em dia</h2>
+          <p class="descricao-planos">
+            Escolha seu plano e aproveite serviços ilimitados durante o mês.
+          </p>
+        </div>
+        <div class="grade-planos">
+          <article class="plano">
+            <h3>Plano Essencial</h3>
+            <p class="preco-plano">R$ 60,00 / mês</p>
+            <p class="beneficio-plano">Cabelo ilimitado</p>
+            <button class="botao-plano" type="button">
+              Agendar pelo plano
+            </button>
+          </article>
+          <article class="plano plano-destaque">
+            <h3>Plano Clássico</h3>
+            <p class="preco-plano">R$ 79,90 / mês</p>
+            <p class="beneficio-plano">Cabelo e sobrancelha ilimitados</p>
+            <button class="botao-plano" type="button">
+              Agendar pelo plano
+            </button>
+          </article>
+          <article class="plano">
+            <h3>Plano Premium</h3>
+            <p class="preco-plano">R$ 99,90 / mês</p>
+            <p class="beneficio-plano">
+              Cabelo, barba e sobrancelha ilimitados
+            </p>
+            <button class="botao-plano" type="button">
+              Agendar pelo plano
+            </button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

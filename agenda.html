@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/dados.js" defer></script>
+    <script src="js/agenda.js" defer></script>
+    <title>Agenda | Barber House</title>
+  </head>
+  <body>
+    <header class="cabecalho">
+      <a href="index.html" class="logo">Barber House</a>
+      <nav class="menu">
+        <a href="index.html">Novo agendamento</a>
+      </nav>
+    </header>
+    <main class="pagina-agenda">
+      <section class="cabecalho-agenda">
+        <p class="destaque">PAINEL DA BARBEARIA</p>
+        <h1>Agenda de atendimentos</h1>
+        <p>Acompanhe os horários e atendimentos da equipe.</p>
+      </section>
+      <section class="painel-agenda">
+        <div class="filtros-agenda">
+          <div class="campo">
+            <label for="filtro-data">Data</label>
+            <input type="date" id="filtro-data" />
+          </div>
+
+          <div class="campo">
+            <label for="filtro-barbeiro">Barbeiro</label>
+            <select name="filtro-barbeiro" id="filtro-barbeiro">
+              <option value="">Todos os barbeiros</option>
+            </select>
+          </div>
+        </div>
+        <p id="resumo-agenda" class="resumo-agenda"></p>
+        <div id="lista-agendamentos" class="lista-agendamentos"></div>
+      </section>
+    </main>
+  </body>
+</html>
