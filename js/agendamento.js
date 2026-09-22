@@ -53,13 +53,59 @@ for (let i = 0; i < barbeiros.length; i++) {
   selectBarbeiro.appendChild(opcao);
 }
 
-for (let i = 0; i < horarios.length; i++) {
-  const opcao = document.createElement("option");
+function atualizarHorarios() {
+  selectHorario.innerHTML = `<option value="">Selecione o horário</option>`;
+  const dataSelecionada = campoData.value;
+  const barbeiroSelecionado = selectBarbeiro.value;
 
-  opcao.value = horarios[i];
-  opcao.textContent = horarios[i];
-  selectHorario.appendChild(opcao);
+  if (dataSelecionada === "" || barbeiroSelecionado === "") {
+    return;
+  }
+
+  const agendamentosSalvos =
+    JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+  const agora = new Date();
+
+  const horaAtual = String(agora.getHours()).padStart(2, "0");
+
+  const minutoAtual = String(agora.getMinutes()).padStart(2, "0");
+
+  const horarioAtual = `${horaAtual}:${minutoAtual}`;
+
+  const dataEhHoje = dataSelecionada === dataMinima;
+
+  for (let i = 0; i < horarios.length; i++) {
+    const horarioPassou = dataEhHoje && horarios[i] <= horarioAtual;
+
+    const horarioOcupado = agendamentosSalvos.some(function (item) {
+      return (
+        item.data === dataSelecionada &&
+        item.barbeiro === barbeiroSelecionado &&
+        item.horario === horarios[i]
+      );
+    });
+
+    if (selectHorario.options.length === 1) {
+      selectHorario.options[0].textContent = "Nenhum horário disponível";
+
+      selectHorario.options[0].disabled = true;
+    }
+
+    if (horarioPassou || horarioOcupado) {
+      continue;
+    }
+
+    const opcao = document.createElement("option");
+
+    opcao.value = horarios[i];
+    opcao.textContent = horarios[i];
+    selectHorario.appendChild(opcao);
+  }
 }
+
+campoData.addEventListener("change", atualizarHorarios);
+selectBarbeiro.addEventListener("change", atualizarHorarios);
 
 formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
@@ -103,4 +149,5 @@ formulario.addEventListener("submit", function (evento) {
 
   mensagemFormulario.textContent = "Agendamento confirmado com sucesso!";
   formulario.reset();
+  atualizarHorarios();
 });
