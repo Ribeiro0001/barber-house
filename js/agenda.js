@@ -1,9 +1,3 @@
-const usuarioLogado = sessionStorage.getItem("usuarioLogado");
-
-if (usuarioLogado !== "true") {
-  window.location.replace("login.html");
-}
-
 const filtroData = document.getElementById("filtro-data");
 
 const filtroBarbeiro = document.getElementById("filtro-barbeiro");
@@ -11,6 +5,8 @@ const filtroBarbeiro = document.getElementById("filtro-barbeiro");
 const resumoAgenda = document.getElementById("resumo-agenda");
 
 const listaAgendamentos = document.getElementById("lista-agendamentos");
+
+const filtroStatus = document.getElementById("filtro-status");
 
 const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
 
@@ -85,7 +81,7 @@ function exibirAgendamentos(lista) {
       const agendamentoEncontrado = agendamentos.find(function (item) {
         return item.id === agendamento.id;
       });
-      agendamentoEncontrado.status = "Concluído";
+      agendamentoEncontrado.status = "concluído";
 
       localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
       filtrarAgendamentos();
@@ -128,6 +124,7 @@ exibirAgendamentos(agendamentos);
 function filtrarAgendamentos() {
   const dataSelecionada = filtroData.value;
   const barbeiroSelecionado = filtroBarbeiro.value;
+  const statusSelecionado = filtroStatus.value;
 
   const agendamentosFiltrados = agendamentos.filter(function (item) {
     const correspondeData =
@@ -136,7 +133,12 @@ function filtrarAgendamentos() {
     const correspondeBarbeiro =
       barbeiroSelecionado === "" || item.barbeiro === barbeiroSelecionado;
 
-    return correspondeData && correspondeBarbeiro;
+    const statusDoItem = item.status ? item.status.toLowerCase() : "";
+
+    const correspondeStatus =
+      statusSelecionado === "" || statusDoItem === statusSelecionado;
+
+    return correspondeData && correspondeBarbeiro && correspondeStatus;
   });
 
   exibirAgendamentos(agendamentosFiltrados);
@@ -150,3 +152,4 @@ botaoSair.addEventListener("click", function () {
 
 filtroData.addEventListener("change", filtrarAgendamentos);
 filtroBarbeiro.addEventListener("change", filtrarAgendamentos);
+filtroStatus.addEventListener("change", filtrarAgendamentos);
