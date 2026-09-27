@@ -387,6 +387,65 @@ input[type="date"] {
 .botao-cancelar {
   background-color: #b83c3c;
 }
+
+.pagina-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.card-login {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background-color: #16191f;
+  border: 1px solid #292d35;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.card-login h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#form-login {
+  display: grid;
+  gap: 1rem;
+}
+
+#form-login button {
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #d4af37;
+  color: #111317;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#mensagem-login {
+  min-height: 1.5rem;
+  color: #e06b6b;
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#botao-sair {
+  padding: 0.65rem 0.9rem;
+  background-color: transparent;
+  border: 1px solid #b83c3c;
+  border-radius: 8px;
+  color: #f5f5f5;
+  font-weight: 700;
+  cursor: pointer;
+}
 @media (max-width: 820px) {
   .cabecalho {
     padding: 1rem 5%;

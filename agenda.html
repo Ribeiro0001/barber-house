@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (sessionStorage.getItem("usuarioLogado") !== "true") {
+        window.location.replace("login.html");
+      }
+    </script>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/dados.js" defer></script>
     <script src="js/agenda.js" defer></script>
@@ -13,6 +18,7 @@
       <a href="index.html" class="logo">Barber House</a>
       <nav class="menu">
         <a href="index.html">Novo agendamento</a>
+        <button type="button" id="botao-sair">Sair</button>
       </nav>
     </header>
     <main class="pagina-agenda">

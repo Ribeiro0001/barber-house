@@ -1,3 +1,9 @@
+const usuarioLogado = sessionStorage.getItem("usuarioLogado");
+
+if (usuarioLogado !== "true") {
+  window.location.replace("login.html");
+}
+
 const filtroData = document.getElementById("filtro-data");
 
 const filtroBarbeiro = document.getElementById("filtro-barbeiro");
@@ -7,6 +13,8 @@ const resumoAgenda = document.getElementById("resumo-agenda");
 const listaAgendamentos = document.getElementById("lista-agendamentos");
 
 const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+const botaoSair = document.getElementById("botao-sair");
 
 for (let i = 0; i < barbeiros.length; i++) {
   const opcao = document.createElement("option");
@@ -133,6 +141,12 @@ function filtrarAgendamentos() {
 
   exibirAgendamentos(agendamentosFiltrados);
 }
+
+botaoSair.addEventListener("click", function () {
+  sessionStorage.removeItem("usuarioLogado");
+
+  window.location.replace("login.html");
+});
 
 filtroData.addEventListener("change", filtrarAgendamentos);
 filtroBarbeiro.addEventListener("change", filtrarAgendamentos);
