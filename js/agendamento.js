@@ -80,18 +80,12 @@ function atualizarHorarios() {
 
     const horarioOcupado = agendamentosSalvos.some(function (item) {
       return (
+        item.status !== "cancelado" &&
         item.data === dataSelecionada &&
         item.barbeiro === barbeiroSelecionado &&
         item.horario === horarios[i]
       );
     });
-
-    if (selectHorario.options.length === 1) {
-      selectHorario.options[0].textContent = "Nenhum horário disponível";
-
-      selectHorario.options[0].disabled = true;
-    }
-
     if (horarioPassou || horarioOcupado) {
       continue;
     }
@@ -101,6 +95,12 @@ function atualizarHorarios() {
     opcao.value = horarios[i];
     opcao.textContent = horarios[i];
     selectHorario.appendChild(opcao);
+  }
+
+  if (selectHorario.options.length === 1) {
+    selectHorario.options[0].textContent = "Nenhum horário disponível";
+
+    selectHorario.options[0].disabled = true;
   }
 }
 
@@ -118,6 +118,7 @@ formulario.addEventListener("submit", function (evento) {
   const data = document.getElementById("data").value;
 
   const agendamento = {
+    id: Date.now(),
     nome: nome,
     telefone: telefone,
     servico: servico,
@@ -125,6 +126,7 @@ formulario.addEventListener("submit", function (evento) {
     horario: horario,
     categoria: categoria,
     data: data,
+    status: "agendado",
   };
 
   const agendamentosSalvos =
@@ -132,6 +134,7 @@ formulario.addEventListener("submit", function (evento) {
 
   const horarioOcupado = agendamentosSalvos.some(function (item) {
     return (
+      item.status !== "cancelado" &&
       item.barbeiro === barbeiro &&
       item.data === data &&
       item.horario === horario

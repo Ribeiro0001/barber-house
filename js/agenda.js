@@ -59,9 +59,57 @@ function exibirAgendamentos(lista) {
 
     contato.textContent = `WhatsApp: ${agendamento.telefone}`;
 
+    const statusAgendamento = document.createElement("p");
+
+    statusAgendamento.classList.add("status-agendamento");
+
+    statusAgendamento.textContent = `Status: ${agendamento.status}`;
+
+    const botaoConcluir = document.createElement("button");
+
+    botaoConcluir.type = "button";
+
+    botaoConcluir.textContent = "Concluir";
+
+    botaoConcluir.classList.add("botao-concluir");
+
+    botaoConcluir.addEventListener("click", function () {
+      const agendamentoEncontrado = agendamentos.find(function (item) {
+        return item.id === agendamento.id;
+      });
+      agendamentoEncontrado.status = "Concluído";
+
+      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+      filtrarAgendamentos();
+    });
+
+    const botaoCancelar = document.createElement("button");
+
+    botaoCancelar.type = "button";
+
+    botaoCancelar.textContent = "Cancelar";
+
+    botaoCancelar.classList.add("botao-cancelar");
+
+    botaoCancelar.addEventListener("click", function () {
+      const agendamentoEncontrado = agendamentos.find(function (item) {
+        return item.id === agendamento.id;
+      });
+      agendamentoEncontrado.status = "cancelado";
+
+      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+      filtrarAgendamentos();
+    });
+
     card.appendChild(titulo);
     card.appendChild(detalhes);
     card.appendChild(contato);
+    card.appendChild(statusAgendamento);
+
+    if (agendamento.status === "agendado") {
+      card.appendChild(botaoConcluir);
+      card.appendChild(botaoCancelar);
+    }
 
     listaAgendamentos.appendChild(card);
   }
