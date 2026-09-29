@@ -12,9 +12,31 @@ const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
 
 const botaoSair = document.getElementById("botao-sair");
 
-async function carregarfiltroBarbeiro (){
-  const {data: barbeirosDoBanco, error} = 
+async function carregarfiltroBarbeiros() {
+  const { data: barbeirosDoBanco, error } = await clienteSupabase
+    .from("barbeiros")
+    .select("id, nome")
+    .eq("ativo", true)
+    .order("nome");
+
+  if (error) {
+    resumoAgenda.textContent = "Não foi possível carregar os barbeiros";
+    return;
+  }
+  for (let i = 0; i < barbeirosDoBanco.length; i++) {
+    const barbeiro = barbeirosDoBanco[i];
+
+    const opcao = document.createElement("option");
+
+    opcao.value = barbeiro.nome;
+    opcao.textContent = barbeiro.nome;
+    opcao.dataset.id = barbeiro.id;
+
+    filtroBarbeiro.appendChild(opcao);
+  }
 }
+
+carregarfiltroBarbeiros();
 
 function exibirAgendamentos(lista) {
   listaAgendamentos.innerHTML = "";

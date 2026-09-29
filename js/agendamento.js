@@ -1,4 +1,3 @@
-
 const selectServico = document.getElementById("servico");
 
 const selectBarbeiro = document.getElementById("barbeiro");
@@ -37,19 +36,19 @@ for (let i = 0; i < botoesPlano.length; i++) {
     });
   });
 }
- async function carregarServicos(){
-  const {data: servicosDoBanco, error } = await clienteSupabase
-  .from("servicos")
-  .select("id, nome, duracao_minutos, preco, pontos")
-  .eq("ativo", true)
-  .order("nome")
+async function carregarServicos() {
+  const { data: servicosDoBanco, error } = await clienteSupabase
+    .from("servicos")
+    .select("id, nome, duracao_minutos, preco, pontos")
+    .eq("ativo", true)
+    .order("nome");
 
-  if(error) {
+  if (error) {
     mensagemFormulario.textContent = "Não foi possivel carregar os serviços";
-    return; 
+    return;
   }
 
-  for(let i = 0; i < servicosDoBanco.length; i++) {
+  for (let i = 0; i < servicosDoBanco.length; i++) {
     const servico = servicosDoBanco[i];
 
     const opcao = document.createElement("option");
@@ -62,20 +61,19 @@ for (let i = 0; i < botoesPlano.length; i++) {
     opcao.dataset.preco = servico.preco;
     opcao.dataset.pontos = servico.pontos;
 
-    selectServico.appendChild(opcao)
+    selectServico.appendChild(opcao);
   }
 }
 carregarServicos();
 
+async function carregarBarbeiros() {
+  const { data: barbeirosDoBanco, error } = await clienteSupabase
+    .from("barbeiros")
+    .select("id, nome")
+    .eq("ativo", true)
+    .order("nome");
 
- async function carregarBarbeiros(){
-  const {data: barbeirosDoBanco, error } = await clienteSupabase
-  .from("barbeiros")
-  .select("id, nome")
-  .eq("ativo", true)
-  .order("nome");
- 
-  if (error){
+  if (error) {
     mensagemFormulario.textContent = "Não foi possivel carregar os barbeiros";
     return;
   }
@@ -92,10 +90,9 @@ carregarServicos();
     opcao.dataset.id = barbeiro.id;
 
     selectBarbeiro.appendChild(opcao);
-
   }
- }
- carregarBarbeiros();
+}
+carregarBarbeiros();
 
 function atualizarHorarios() {
   selectHorario.innerHTML = `<option value="">Selecione o horário</option>`;
@@ -151,6 +148,20 @@ function atualizarHorarios() {
 campoData.addEventListener("change", atualizarHorarios);
 selectBarbeiro.addEventListener("change", atualizarHorarios);
 
+function calcularHorarioFim(horarioInicio, duracaoMinutos) {
+  const partesHorario = horarioInicio.split(":");
+
+  const horas = Number(partesHorario[0]);
+  const minutos = Number(partesHorario[1]);
+
+  const totalMinutos = horas * 60 + minutos + duracaoMinutos;
+
+  const horaFinal = Math.floor(totalMinutos / 60);
+  const minutoFinal = totalMinutos % 60;
+
+  return `${String(horaFinal).padStart(2, "0")}:${String(minutoFinal).padStart(2, "0")}`;
+}
+
 formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
   const nome = document.getElementById("nome").value;
@@ -161,17 +172,27 @@ formulario.addEventListener("submit", function (evento) {
   const categoria = document.getElementById("categoria").value;
   const data = document.getElementById("data").value;
 
-  const opcaoBarbeiroSelecionada = selectBarbeiro.options[selectBarbeiro.selectedIndex];
+  const opcaoBarbeiroSelecionada =
+    selectBarbeiro.options[selectBarbeiro.selectedIndex];
 
-  const opcaoServicoSelecionada = selectServico.options[selectServico.selectedIndex];
+  const opcaoServicoSelecionada =
+    selectServico.options[selectServico.selectedIndex];
 
   const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
-  const servicoId = number(opcaoServicoSelecionada.dataset.id);
-  const duracaominutos = number(opcaoServicoSelecionada.dataset.duracao);
-  const preco = number(opcaoServicoSelecionada.dataset.preco);
-  const pontos = number(opcaoServicoSelecionada.dataset.pontos);
+  const servicoId = Number(opcaoServicoSelecionada.dataset.id);
+  const duracaoMinutos = Number(opcaoServicoSelecionada.dataset.duracao);
+  const preco = Number(opcaoServicoSelecionada.dataset.preco);
+  const pontos = Number(opcaoServicoSelecionada.dataset.pontos);
+  const horarioFim = calcularHorarioFim(horario, duracaoMinutos);
 
-  console.log({barbeiroId, servicoId, duracaominutos, preco, pontos,});
+  console.log({
+    barbeiroId,
+    servicoId,
+    duracaoMinutos,
+    preco,
+    pontos,
+    horarioFim,
+  });
 
   const agendamento = {
     id: Date.now(),
