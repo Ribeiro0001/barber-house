@@ -12,12 +12,8 @@ const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
 
 const botaoSair = document.getElementById("botao-sair");
 
-for (let i = 0; i < barbeiros.length; i++) {
-  const opcao = document.createElement("option");
-
-  opcao.value = barbeiros[i];
-  opcao.textContent = barbeiros[i];
-  filtroBarbeiro.appendChild(opcao);
+async function carregarfiltroBarbeiro (){
+  const {data: barbeirosDoBanco, error} = 
 }
 
 function exibirAgendamentos(lista) {

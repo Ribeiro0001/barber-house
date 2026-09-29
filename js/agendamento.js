@@ -161,6 +161,18 @@ formulario.addEventListener("submit", function (evento) {
   const categoria = document.getElementById("categoria").value;
   const data = document.getElementById("data").value;
 
+  const opcaoBarbeiroSelecionada = selectBarbeiro.options[selectBarbeiro.selectedIndex];
+
+  const opcaoServicoSelecionada = selectServico.options[selectServico.selectedIndex];
+
+  const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
+  const servicoId = number(opcaoServicoSelecionada.dataset.id);
+  const duracaominutos = number(opcaoServicoSelecionada.dataset.duracao);
+  const preco = number(opcaoServicoSelecionada.dataset.preco);
+  const pontos = number(opcaoServicoSelecionada.dataset.pontos);
+
+  console.log({barbeiroId, servicoId, duracaominutos, preco, pontos,});
+
   const agendamento = {
     id: Date.now(),
     nome: nome,
