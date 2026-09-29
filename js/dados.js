@@ -1,6 +1,3 @@
-const barbeiros = ["Lucas", "Matheus", "Rafael"];
-
-const servicos = ["Cabelo", "Barba", "Sobrancelha", "Cabelo e barba"];
 
 const horarios = [
   "09:30",

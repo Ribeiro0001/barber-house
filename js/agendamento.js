@@ -1,3 +1,4 @@
+
 const selectServico = document.getElementById("servico");
 
 const selectBarbeiro = document.getElementById("barbeiro");
@@ -36,22 +37,65 @@ for (let i = 0; i < botoesPlano.length; i++) {
     });
   });
 }
+ async function carregarServicos(){
+  const {data: servicosDoBanco, error } = await clienteSupabase
+  .from("servicos")
+  .select("id, nome, duracao_minutos, preco, pontos")
+  .eq("ativo", true)
+  .order("nome")
 
-for (let i = 0; i < servicos.length; i++) {
-  const opcao = document.createElement("option");
+  if(error) {
+    mensagemFormulario.textContent = "Não foi possivel carregar os serviços";
+    return; 
+  }
 
-  opcao.value = servicos[i];
-  opcao.textContent = servicos[i];
-  selectServico.appendChild(opcao);
+  for(let i = 0; i < servicosDoBanco.length; i++) {
+    const servico = servicosDoBanco[i];
+
+    const opcao = document.createElement("option");
+
+    opcao.value = servico.nome;
+    opcao.textContent = servico.nome;
+
+    opcao.dataset.id = servico.id;
+    opcao.dataset.duracao = servico.duracao_minutos;
+    opcao.dataset.preco = servico.preco;
+    opcao.dataset.pontos = servico.pontos;
+
+    selectServico.appendChild(opcao)
+  }
 }
+carregarServicos();
 
-for (let i = 0; i < barbeiros.length; i++) {
-  const opcao = document.createElement("option");
 
-  opcao.value = barbeiros[i];
-  opcao.textContent = barbeiros[i];
-  selectBarbeiro.appendChild(opcao);
-}
+ async function carregarBarbeiros(){
+  const {data: barbeirosDoBanco, error } = await clienteSupabase
+  .from("barbeiros")
+  .select("id, nome")
+  .eq("ativo", true)
+  .order("nome");
+ 
+  if (error){
+    mensagemFormulario.textContent = "Não foi possivel carregar os barbeiros";
+    return;
+  }
+
+  for (let i = 0; i < barbeirosDoBanco.length; i++) {
+    const barbeiro = barbeirosDoBanco[i];
+
+    const opcao = document.createElement("option");
+
+    opcao.value = barbeiro.nome;
+
+    opcao.textContent = barbeiro.nome;
+
+    opcao.dataset.id = barbeiro.id;
+
+    selectBarbeiro.appendChild(opcao);
+
+  }
+ }
+ carregarBarbeiros();
 
 function atualizarHorarios() {
   selectHorario.innerHTML = `<option value="">Selecione o horário</option>`;
