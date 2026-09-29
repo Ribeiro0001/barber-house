@@ -1,3 +1,18 @@
+async function verificarAutenticacao() {
+  const {
+    data: { session },
+    error,
+  } = await clienteSupabase.auth.getSession();
+
+  if (error || !session) {
+    window.location.replace("login.html");
+
+    return;
+  }
+}
+
+verificarAutenticacao();
+
 const filtroData = document.getElementById("filtro-data");
 
 const filtroBarbeiro = document.getElementById("filtro-barbeiro");
@@ -8,7 +23,7 @@ const listaAgendamentos = document.getElementById("lista-agendamentos");
 
 const filtroStatus = document.getElementById("filtro-status");
 
-const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+let agendamentos = [];
 
 const botaoSair = document.getElementById("botao-sair");
 
@@ -37,6 +52,65 @@ async function carregarfiltroBarbeiros() {
 }
 
 carregarfiltroBarbeiros();
+
+async function carregarAgendamentos() {
+  const { data: agendamentosDoBanco, error } = await clienteSupabase.rpc(
+    "listar_agendamentos_admin",
+  );
+
+  if (error) {
+    console.error("Erro ao carregar agendamentos:", error);
+
+    resumoAgenda.textContent = "Não foi possível carregar os agendamentos.";
+
+    return;
+  }
+
+  agendamentos = agendamentosDoBanco.map(function (item) {
+    return {
+      id: item.id,
+      nome: item.nome_cliente,
+      telefone: item.telefone,
+
+      barbeiroId: item.barbeiro_id,
+      barbeiro: item.barbeiro_nome,
+
+      servicoId: item.servico_id,
+      servico: item.servico_nome,
+
+      data: item.data,
+      horario: item.horario_inicio.slice(0, 5),
+      horarioFim: item.horario_fim.slice(0, 5),
+
+      categoria: item.categoria,
+      status: item.status,
+
+      preco: item.preco_cobrado,
+      pontos: item.pontos_gerados,
+    };
+  });
+
+  exibirAgendamentos(agendamentos);
+}
+
+carregarAgendamentos();
+
+async function atualizarStatusAgendamento(agendamentoId, novoStatus) {
+  const { error } = await clienteSupabase.rpc("atualizar_status_agendamento", {
+    p_agendamento_id: agendamentoId,
+    p_status: novoStatus,
+  });
+
+  if (error) {
+    console.error("Erro ao atualizar status:", error);
+
+    resumoAgenda.textContent = error.message;
+
+    return;
+  }
+
+  await carregarAgendamentos();
+}
 
 function exibirAgendamentos(lista) {
   listaAgendamentos.innerHTML = "";
@@ -85,7 +159,13 @@ function exibirAgendamentos(lista) {
 
     statusAgendamento.classList.add("status-agendamento");
 
-    statusAgendamento.textContent = `Status: ${agendamento.status}`;
+    const textosStatus = {
+      agendado: "Agendado",
+      concluido: "Concluído",
+      cancelado: "Cancelado",
+    };
+
+    statusAgendamento.textContent = `Status: ${textosStatus[agendamento.status]}`;
 
     const botaoConcluir = document.createElement("button");
 
@@ -95,14 +175,10 @@ function exibirAgendamentos(lista) {
 
     botaoConcluir.classList.add("botao-concluir");
 
-    botaoConcluir.addEventListener("click", function () {
-      const agendamentoEncontrado = agendamentos.find(function (item) {
-        return item.id === agendamento.id;
-      });
-      agendamentoEncontrado.status = "concluído";
+    botaoConcluir.addEventListener("click", async function () {
+      botaoConcluir.disabled = true;
 
-      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
-      filtrarAgendamentos();
+      await atualizarStatusAgendamento(agendamento.id, "concluido");
     });
 
     const botaoCancelar = document.createElement("button");
@@ -113,14 +189,10 @@ function exibirAgendamentos(lista) {
 
     botaoCancelar.classList.add("botao-cancelar");
 
-    botaoCancelar.addEventListener("click", function () {
-      const agendamentoEncontrado = agendamentos.find(function (item) {
-        return item.id === agendamento.id;
-      });
-      agendamentoEncontrado.status = "cancelado";
+    botaoCancelar.addEventListener("click", async function () {
+      botaoCancelar.disabled = true;
 
-      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
-      filtrarAgendamentos();
+      await atualizarStatusAgendamento(agendamento.id, "cancelado");
     });
 
     card.appendChild(titulo);
@@ -136,8 +208,6 @@ function exibirAgendamentos(lista) {
     listaAgendamentos.appendChild(card);
   }
 }
-
-exibirAgendamentos(agendamentos);
 
 function filtrarAgendamentos() {
   const dataSelecionada = filtroData.value;
@@ -162,8 +232,8 @@ function filtrarAgendamentos() {
   exibirAgendamentos(agendamentosFiltrados);
 }
 
-botaoSair.addEventListener("click", function () {
-  sessionStorage.removeItem("usuarioLogado");
+botaoSair.addEventListener("click", async function () {
+  await clienteSupabase.auth.signOut();
 
   window.location.replace("login.html");
 });

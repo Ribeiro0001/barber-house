@@ -1,28 +1,35 @@
 const formularioLogin = document.getElementById("form-login");
 
-const campoUsuario = document.getElementById("usuario");
+const campoEmail = document.getElementById("email");
 
 const campoSenha = document.getElementById("senha");
 
 const mensagemLogin = document.getElementById("mensagem-login");
 
-const usuarioCorreto = "admin";
+const botaoEntrar = formularioLogin.querySelector('button[type="submit"]');
 
-const senhaCorreta = "1234";
-
-formularioLogin.addEventListener("submit", function (evento) {
+formularioLogin.addEventListener("submit", async function (evento) {
   evento.preventDefault();
 
-  const usarioDigitado = campoUsuario.value.trim();
-
+  const emailDigitado = campoEmail.value.trim();
   const senhaDigitada = campoSenha.value;
 
-  if (usarioDigitado === usuarioCorreto && senhaDigitada === senhaCorreta) {
-    sessionStorage.setItem("usuarioLogado", "true");
+  mensagemLogin.textContent = "Entrando...";
+  botaoEntrar.disabled = true;
 
-    window.location.href = "agenda.html";
+  const { error } = await clienteSupabase.auth.signInWithPassword({
+    email: emailDigitado,
+    password: senhaDigitada,
+  });
+
+  if (error) {
+    console.error("Erro no login:", error);
+
+    mensagemLogin.textContent = "E-mail ou senha incorretos.";
+    botaoEntrar.disabled = false;
 
     return;
   }
-  mensagemLogin.textContent = "Usuário ou senha incorretos.";
+
+  window.location.replace("agenda.html");
 });
