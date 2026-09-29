@@ -94,59 +94,9 @@ async function carregarBarbeiros() {
 }
 carregarBarbeiros();
 
-function atualizarHorarios() {
-  selectHorario.innerHTML = `<option value="">Selecione o horário</option>`;
-  const dataSelecionada = campoData.value;
-  const barbeiroSelecionado = selectBarbeiro.value;
-
-  if (dataSelecionada === "" || barbeiroSelecionado === "") {
-    return;
-  }
-
-  const agendamentosSalvos =
-    JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-  const agora = new Date();
-
-  const horaAtual = String(agora.getHours()).padStart(2, "0");
-
-  const minutoAtual = String(agora.getMinutes()).padStart(2, "0");
-
-  const horarioAtual = `${horaAtual}:${minutoAtual}`;
-
-  const dataEhHoje = dataSelecionada === dataMinima;
-
-  for (let i = 0; i < horarios.length; i++) {
-    const horarioPassou = dataEhHoje && horarios[i] <= horarioAtual;
-
-    const horarioOcupado = agendamentosSalvos.some(function (item) {
-      return (
-        item.status !== "cancelado" &&
-        item.data === dataSelecionada &&
-        item.barbeiro === barbeiroSelecionado &&
-        item.horario === horarios[i]
-      );
-    });
-    if (horarioPassou || horarioOcupado) {
-      continue;
-    }
-
-    const opcao = document.createElement("option");
-
-    opcao.value = horarios[i];
-    opcao.textContent = horarios[i];
-    selectHorario.appendChild(opcao);
-  }
-
-  if (selectHorario.options.length === 1) {
-    selectHorario.options[0].textContent = "Nenhum horário disponível";
-
-    selectHorario.options[0].disabled = true;
-  }
-}
-
 campoData.addEventListener("change", atualizarHorarios);
 selectBarbeiro.addEventListener("change", atualizarHorarios);
+selectServico.addEventListener("change", atualizarHorarios);
 
 function calcularHorarioFim(horarioInicio, duracaoMinutos) {
   const partesHorario = horarioInicio.split(":");
@@ -162,7 +112,89 @@ function calcularHorarioFim(horarioInicio, duracaoMinutos) {
   return `${String(horaFinal).padStart(2, "0")}:${String(minutoFinal).padStart(2, "0")}`;
 }
 
-formulario.addEventListener("submit", function (evento) {
+async function atualizarHorarios() {
+  selectHorario.innerHTML = `<option value="">Selecione o horário</option>`;
+
+  const dataSelecionada = campoData.value;
+  const barbeiroSelecionado = selectBarbeiro.value;
+  const servicoSelecionado = selectServico.value;
+
+  if (
+    dataSelecionada === "" ||
+    barbeiroSelecionado === "" ||
+    servicoSelecionado === ""
+  ) {
+    return;
+  }
+
+  const opcaoBarbeiroSelecionada =
+    selectBarbeiro.options[selectBarbeiro.selectedIndex];
+
+  const opcaoServicoSelecionada =
+    selectServico.options[selectServico.selectedIndex];
+
+  const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
+
+  const duracaoMinutos = Number(opcaoServicoSelecionada.dataset.duracao);
+
+  const { data: horariosOcupados, error } = await clienteSupabase.rpc(
+    "listar_horarios_ocupados",
+    {
+      p_barbeiro_id: barbeiroId,
+      p_data: dataSelecionada,
+    },
+  );
+
+  if (error) {
+    console.error("Erro ao consultar horários:", error);
+
+    mensagemFormulario.textContent = "Não foi possível consultar os horários.";
+
+    return;
+  }
+
+  const agora = new Date();
+
+  const horaAtual = String(agora.getHours()).padStart(2, "0");
+  const minutoAtual = String(agora.getMinutes()).padStart(2, "0");
+  const horarioAtual = `${horaAtual}:${minutoAtual}`;
+
+  const dataEhHoje = dataSelecionada === dataMinima;
+
+  for (let i = 0; i < horarios.length; i++) {
+    const horarioInicio = horarios[i];
+
+    const horarioFim = calcularHorarioFim(horarioInicio, duracaoMinutos);
+
+    const horarioPassou = dataEhHoje && horarioInicio <= horarioAtual;
+
+    const horarioOcupado = horariosOcupados.some(function (item) {
+      const inicioOcupado = item.horario_inicio.slice(0, 5);
+      const fimOcupado = item.horario_fim.slice(0, 5);
+
+      return horarioInicio < fimOcupado && horarioFim > inicioOcupado;
+    });
+
+    if (horarioPassou || horarioOcupado) {
+      continue;
+    }
+
+    const opcao = document.createElement("option");
+
+    opcao.value = horarioInicio;
+    opcao.textContent = horarioInicio;
+
+    selectHorario.appendChild(opcao);
+  }
+
+  if (selectHorario.options.length === 1) {
+    selectHorario.options[0].textContent = "Nenhum horário disponível";
+
+    selectHorario.options[0].disabled = true;
+  }
+}
+
+formulario.addEventListener("submit", async function (evento) {
   evento.preventDefault();
   const nome = document.getElementById("nome").value;
   const telefone = document.getElementById("telefone").value;
@@ -194,38 +226,27 @@ formulario.addEventListener("submit", function (evento) {
     horarioFim,
   });
 
-  const agendamento = {
-    id: Date.now(),
-    nome: nome,
-    telefone: telefone,
-    servico: servico,
-    barbeiro: barbeiro,
-    horario: horario,
-    categoria: categoria,
-    data: data,
-    status: "agendado",
-  };
+  const { data: agendamentoCriado, error } = await clienteSupabase.rpc(
+    "criar_agendamento",
+    {
+      p_nome_cliente: nome,
+      p_telefone: telefone,
+      p_barbeiro_id: barbeiroId,
+      p_servico_id: servicoId,
+      p_data: data,
+      p_horario_inicio: horario,
+      p_categoria: categoria,
+    },
+  );
 
-  const agendamentosSalvos =
-    JSON.parse(localStorage.getItem("agendamentos")) || [];
+  if (error) {
+    console.error("Erro ao criar agendamento:", error);
+    mensagemFormulario.textContent = error.message;
 
-  const horarioOcupado = agendamentosSalvos.some(function (item) {
-    return (
-      item.status !== "cancelado" &&
-      item.barbeiro === barbeiro &&
-      item.data === data &&
-      item.horario === horario
-    );
-  });
-
-  if (horarioOcupado) {
-    mensagemFormulario.textContent = "Este horário já está ocupado.";
     return;
   }
 
-  agendamentosSalvos.push(agendamento);
-
-  localStorage.setItem("agendamentos", JSON.stringify(agendamentosSalvos));
+  console.log("Agendamento salvo no Supabase:", agendamentoCriado);
 
   mensagemFormulario.textContent = "Agendamento confirmado com sucesso!";
   formulario.reset();
