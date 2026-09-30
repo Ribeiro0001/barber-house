@@ -127,62 +127,35 @@ async function atualizarHorarios() {
     return;
   }
 
-  const opcaoBarbeiroSelecionada =
-    selectBarbeiro.options[selectBarbeiro.selectedIndex];
+  const opcaoBarbeiro = selectBarbeiro.options[selectBarbeiro.selectedIndex];
 
-  const opcaoServicoSelecionada =
-    selectServico.options[selectServico.selectedIndex];
+  const opcaoServico = selectServico.options[selectServico.selectedIndex];
 
-  const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
+  const barbeiroId = Number(opcaoBarbeiro.dataset.id);
+  const servicoId = Number(opcaoServico.dataset.id);
 
-  const duracaoMinutos = Number(opcaoServicoSelecionada.dataset.duracao);
-
-  const { data: horariosOcupados, error } = await clienteSupabase.rpc(
-    "listar_horarios_ocupados",
+  const { data: horariosDisponiveis, error } = await clienteSupabase.rpc(
+    "listar_horarios_disponiveis",
     {
       p_barbeiro_id: barbeiroId,
+      p_servico_id: servicoId,
       p_data: dataSelecionada,
     },
   );
 
   if (error) {
-    console.error("Erro ao consultar horários:", error);
-
-    mensagemFormulario.textContent = "Não foi possível consultar os horários.";
-
+    console.error("Erro ao carregar horários:", error);
+    mensagemFormulario.textContent = "Não foi possível carregar os horários.";
     return;
   }
 
-  const agora = new Date();
-
-  const horaAtual = String(agora.getHours()).padStart(2, "0");
-  const minutoAtual = String(agora.getMinutes()).padStart(2, "0");
-  const horarioAtual = `${horaAtual}:${minutoAtual}`;
-
-  const dataEhHoje = dataSelecionada === dataMinima;
-
-  for (let i = 0; i < horarios.length; i++) {
-    const horarioInicio = horarios[i];
-
-    const horarioFim = calcularHorarioFim(horarioInicio, duracaoMinutos);
-
-    const horarioPassou = dataEhHoje && horarioInicio <= horarioAtual;
-
-    const horarioOcupado = horariosOcupados.some(function (item) {
-      const inicioOcupado = item.horario_inicio.slice(0, 5);
-      const fimOcupado = item.horario_fim.slice(0, 5);
-
-      return horarioInicio < fimOcupado && horarioFim > inicioOcupado;
-    });
-
-    if (horarioPassou || horarioOcupado) {
-      continue;
-    }
+  for (let i = 0; i < horariosDisponiveis.length; i++) {
+    const horario = horariosDisponiveis[i].horario.slice(0, 5);
 
     const opcao = document.createElement("option");
 
-    opcao.value = horarioInicio;
-    opcao.textContent = horarioInicio;
+    opcao.value = horario;
+    opcao.textContent = horario;
 
     selectHorario.appendChild(opcao);
   }
