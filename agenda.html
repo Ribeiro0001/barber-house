@@ -1,21 +1,18 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      if (sessionStorage.getItem("usuarioLogado") !== "true") {
-        window.location.replace("login.html");
-      }
-    </script>
-    <link rel="stylesheet" href="css/style.css" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-      defer
-    ></script>
-    <script src="js/supabase.js" defer></script>
-    <script src="js/agenda.js" defer></script>
-    <title>Agenda | Barber House</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    defer
+  ></script>
+
+  <script src="js/supabase.js?v=3" defer></script>
+  <script src="js/agenda.js?v=3" defer></script>
+
+  <title>Agenda | Barber House</title>
   </head>
   <body>
     <header class="cabecalho">

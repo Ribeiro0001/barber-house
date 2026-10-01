@@ -41,10 +41,14 @@ async function carregarServicos() {
     .from("servicos")
     .select("id, nome, duracao_minutos, preco, pontos")
     .eq("ativo", true)
+    .eq("agendavel_online", true)
     .order("nome");
 
   if (error) {
-    mensagemFormulario.textContent = "Não foi possivel carregar os serviços";
+    console.error("Erro ao carregar serviços:", error);
+
+    mensagemFormulario.textContent = "Não foi possível carregar os serviços.";
+
     return;
   }
 
@@ -53,8 +57,23 @@ async function carregarServicos() {
 
     const opcao = document.createElement("option");
 
+    const precoFormatado = Number(servico.preco).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
     opcao.value = servico.nome;
-    opcao.textContent = servico.nome;
+    const precoInicial =
+      servico.nome === "Reflexo (a partir de)" ||
+      servico.nome === "Nevou (a partir de)";
+
+    if (precoInicial) {
+      const nomeServico = servico.nome.replace(" (a partir de)", "");
+
+      opcao.textContent = `${nomeServico} — a partir de ${precoFormatado}`;
+    } else {
+      opcao.textContent = `${servico.nome} — ${precoFormatado}`;
+    }
 
     opcao.dataset.id = servico.id;
     opcao.dataset.duracao = servico.duracao_minutos;
@@ -64,6 +83,7 @@ async function carregarServicos() {
     selectServico.appendChild(opcao);
   }
 }
+
 carregarServicos();
 
 async function carregarBarbeiros() {
