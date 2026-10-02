@@ -8,6 +8,8 @@ const formulario = document.getElementById("form-agendamento");
 
 const mensagemFormulario = document.getElementById("mensagem-formulario");
 
+const linkWhatsapp = document.getElementById("link-whatsapp");
+
 const campoData = document.getElementById("data");
 
 const botoesPlano = document.querySelectorAll(".botao-plano");
@@ -89,7 +91,7 @@ carregarServicos();
 async function carregarBarbeiros() {
   const { data: barbeirosDoBanco, error } = await clienteSupabase
     .from("barbeiros")
-    .select("id, nome")
+    .select("id, nome, whatsapp")
     .eq("ativo", true)
     .order("nome");
 
@@ -108,6 +110,8 @@ async function carregarBarbeiros() {
     opcao.textContent = barbeiro.nome;
 
     opcao.dataset.id = barbeiro.id;
+
+    opcao.dataset.whatsapp = barbeiro.whatsapp;
 
     selectBarbeiro.appendChild(opcao);
   }
@@ -189,6 +193,8 @@ async function atualizarHorarios() {
 
 formulario.addEventListener("submit", async function (evento) {
   evento.preventDefault();
+  linkWhatsapp.hidden = true;
+  linkWhatsapp.href = "#";
   const nome = document.getElementById("nome").value;
   const telefone = document.getElementById("telefone").value;
   const servico = document.getElementById("servico").value;
@@ -199,6 +205,9 @@ formulario.addEventListener("submit", async function (evento) {
 
   const opcaoBarbeiroSelecionada =
     selectBarbeiro.options[selectBarbeiro.selectedIndex];
+
+  const whatsappBarbeiro = opcaoBarbeiroSelecionada.dataset.whatsapp;
+  console.log("WhatsApp selecionado:", whatsappBarbeiro);
 
   const opcaoServicoSelecionada =
     selectServico.options[selectServico.selectedIndex];
@@ -242,6 +251,30 @@ formulario.addEventListener("submit", async function (evento) {
   console.log("Agendamento salvo no Supabase:", agendamentoCriado);
 
   mensagemFormulario.textContent = "Agendamento confirmado com sucesso!";
+
+  const partesData = data.split("-");
+  const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+
+  const precoFormatado = preco.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  const mensagemWhatsapp =
+    `Olá, ${barbeiro}! Fiz um agendamento pela Barber House.\n\n` +
+    `Cliente: ${nome}\n` +
+    `Serviço: ${servico}\n` +
+    `Data: ${dataFormatada}\n` +
+    `Horário: ${horario}\n` +
+    `Valor: ${precoFormatado}`;
+
+  linkWhatsapp.href =
+    `https://wa.me/${whatsappBarbeiro}?text=` +
+    encodeURIComponent(mensagemWhatsapp);
+
+  linkWhatsapp.textContent = `Enviar confirmação para ${barbeiro}`;
+  linkWhatsapp.hidden = false;
+
   formulario.reset();
   atualizarHorarios();
 });
