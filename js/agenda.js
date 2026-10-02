@@ -23,6 +23,8 @@ const listaAgendamentos = document.getElementById("lista-agendamentos");
 
 const filtroStatus = document.getElementById("filtro-status");
 
+const listaRanking = document.getElementById("lista-ranking")
+
 let agendamentos = [];
 
 const botaoSair = document.getElementById("botao-sair");
@@ -90,10 +92,74 @@ async function carregarAgendamentos() {
     };
   });
 
-  exibirAgendamentos(agendamentos);
+  filtrarAgendamentos();
 }
 
 carregarAgendamentos();
+
+async function carregarRanking() {
+  const { data: ranking, error } = await clienteSupabase.rpc(
+    "listar_ranking_mensal",
+  );
+
+  if (error) {
+    console.error("Erro ao carregar o ranking:", error);
+    listaRanking.innerHTML =
+      `<p class="agenda-vazia">Não foi possível carregar o ranking.</p>`;
+    return;
+  }
+
+  listaRanking.innerHTML = "";
+
+  for (let i = 0; i < ranking.length; i++) {
+    const item = ranking[i];
+
+    const card = document.createElement("article");
+    card.classList.add("card-ranking");
+
+    const temPontos = Number(item.total_pontos) > 0;
+
+    if (temPontos && Number(item.posicao) === 1) {
+  card.classList.add("ranking-lider");
+}
+
+    const posicao = document.createElement("span");
+    posicao.classList.add("ranking-posicao");
+
+    const medalhas = {
+      1: "🥇",
+      2: "🥈",
+      3: "🥉",
+    };
+
+   posicao.textContent = temPontos
+  ? medalhas[item.posicao] || `${item.posicao}º`
+  : "—";
+
+    const informacoes = document.createElement("div");
+    informacoes.classList.add("ranking-informacoes");
+
+    const nome = document.createElement("h3");
+    nome.textContent = item.barbeiro_nome;
+
+
+   const detalhes = document.createElement("p");
+
+detalhes.textContent =
+  `${item.total_pontos} pontos • ` +
+  `${item.total_atendimentos} atendimento(s)`;
+
+    informacoes.appendChild(nome);
+    informacoes.appendChild(detalhes);
+
+    card.appendChild(posicao);
+    card.appendChild(informacoes);
+
+    listaRanking.appendChild(card);
+  }
+}
+
+carregarRanking();
 
 async function atualizarStatusAgendamento(agendamentoId, novoStatus) {
   const { error } = await clienteSupabase.rpc("atualizar_status_agendamento", {
@@ -110,6 +176,7 @@ async function atualizarStatusAgendamento(agendamentoId, novoStatus) {
   }
 
   await carregarAgendamentos();
+  await carregarRanking();
 }
 
 function exibirAgendamentos(lista) {
@@ -129,27 +196,23 @@ function exibirAgendamentos(lista) {
   }
 
   for (let i = 0; i < lista.length; i++) {
-    const agendamento = lista[i];
+  const agendamento = lista[i];
 
-    const partesData = agendamento.data.split("-");
+  const card = document.createElement("article");
+  card.classList.add("card-agenda");
 
-    const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+  const titulo = document.createElement("h2");
+  titulo.textContent = `${agendamento.horario} - ${agendamento.nome}`;
 
-    const card = document.createElement("article");
-    card.classList.add("card-agenda");
+  const detalhes = document.createElement("p");
+  detalhes.classList.add("detalhes-agenda");
 
-    const titulo = document.createElement("h2");
-    titulo.textContent = `${agendamento.horario} - ${agendamento.nome}`;
+  detalhes.textContent =
+  `${agendamento.barbeiro} • ` +
+  `${agendamento.servico} • ` +
+  `${agendamento.categoria}`;
 
-    const detalhes = document.createElement("p");
-
-    detalhes.classList.add("detalhes-agenda");
-
-    detalhes.textContent =
-      `${dataFormatada} | ${agendamento.barbeiro} | ` +
-      `${agendamento.servico} | ${agendamento.categoria}`;
-
-    const contato = document.createElement("p");
+  const contato = document.createElement("p");
 
     contato.classList.add("contato-agenda");
 
@@ -227,6 +290,12 @@ function filtrarAgendamentos() {
       statusSelecionado === "" || statusDoItem === statusSelecionado;
 
     return correspondeData && correspondeBarbeiro && correspondeStatus;
+
+
+  });
+
+  agendamentosFiltrados.sort(function (primeiro, segundo) {
+    return primeiro.horario.localeCompare(segundo.horario);
   });
 
   exibirAgendamentos(agendamentosFiltrados);
@@ -241,3 +310,13 @@ botaoSair.addEventListener("click", async function () {
 filtroData.addEventListener("change", filtrarAgendamentos);
 filtroBarbeiro.addEventListener("change", filtrarAgendamentos);
 filtroStatus.addEventListener("change", filtrarAgendamentos);
+
+const hoje = new Date();
+
+const anoAtual = hoje.getFullYear();
+const mesAtual = String(hoje.getMonth() + 1).padStart(2, "0");
+const diaAtual = String(hoje.getDate()).padStart(2, "0");
+
+const dataHoje = `${anoAtual}-${mesAtual}-${diaAtual}`;
+
+filtroData.value = dataHoje;
