@@ -514,11 +514,7 @@ input[type="date"] {
 
 .ranking-lider {
   border-color: #d4af37;
-  background: linear-gradient(
-    135deg,
-    rgba(212, 175, 55, 0.14),
-    #0f1115
-  );
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.14), #0f1115);
 }
 
 .ranking-posicao {
@@ -537,6 +533,11 @@ input[type="date"] {
 .ranking-informacoes p {
   color: #b5bac3;
   font-size: 0.85rem;
+}
+
+.mensagem-formulario {
+  white-space: pre-line;
+  line-height: 1.6;
 }
 @media (max-width: 820px) {
   .cabecalho {
@@ -581,10 +582,10 @@ input[type="date"] {
   }
 
   .conteudo-painel {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+  }
 
-.painel-ranking {
-  position: static;
-}
+  .painel-ranking {
+    position: static;
+  }
 }

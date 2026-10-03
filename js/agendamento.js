@@ -229,7 +229,7 @@ formulario.addEventListener("submit", async function (evento) {
   });
 
   const { data: agendamentoCriado, error } = await clienteSupabase.rpc(
-    "criar_agendamento",
+    "criar_agendamento_com_resumo",
     {
       p_nome_cliente: nome,
       p_telefone: telefone,
@@ -248,17 +248,38 @@ formulario.addEventListener("submit", async function (evento) {
     return;
   }
 
-  console.log("Agendamento salvo no Supabase:", agendamentoCriado);
+  const resumoAgendamento = agendamentoCriado[0];
 
-  mensagemFormulario.textContent = "Agendamento confirmado com sucesso!";
-
-  const partesData = data.split("-");
-  const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
-
-  const precoFormatado = preco.toLocaleString("pt-BR", {
+  const precoNormalFormatado = Number(
+    resumoAgendamento.preco_normal,
+  ).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
+
+  const descontoFormatado = Number(
+    resumoAgendamento.valor_desconto,
+  ).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  const valorCobradoFormatado = Number(
+    resumoAgendamento.valor_cobrado,
+  ).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  if (categoria === "plano") {
+    mensagemFormulario.textContent =
+      `Agendamento confirmado!\n` +
+      `Preço normal: ${precoNormalFormatado}\n` +
+      `Desconto do plano: ${descontoFormatado}\n` +
+      `Valor a pagar: ${valorCobradoFormatado}`;
+  } else {
+    mensagemFormulario.textContent = `Agendamento confirmado! Valor a pagar: ${valorCobradoFormatado}`;
+  }
 
   const mensagemWhatsapp =
     `Olá, ${barbeiro}! Fiz um agendamento pela Barber House.\n\n` +
