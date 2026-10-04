@@ -1,17 +1,37 @@
+let perfilUsuario = null;
+
 async function verificarAutenticacao() {
   const {
     data: { session },
-    error,
+    error: erroSessao,
   } = await clienteSupabase.auth.getSession();
 
-  if (error || !session) {
+  if (erroSessao || !session) {
+    window.location.replace("login.html");
+    return false;
+  }
+
+  const { data: perfil, error: erroPerfil } = await clienteSupabase
+    .from("perfis")
+    .select("nome, tipo, barbeiro_id, ativo")
+    .eq("usuario_id", session.user.id)
+    .single();
+
+  if (erroPerfil || !perfil || !perfil.ativo) {
+    console.error("Perfil inválido:", erroPerfil);
+
+    await clienteSupabase.auth.signOut();
     window.location.replace("login.html");
 
-    return;
+    return false;
   }
-}
 
-verificarAutenticacao();
+  perfilUsuario = perfil;
+
+  console.log("Perfil autenticado:", perfilUsuario);
+
+  return true;
+}
 
 const filtroData = document.getElementById("filtro-data");
 
@@ -23,7 +43,29 @@ const listaAgendamentos = document.getElementById("lista-agendamentos");
 
 const filtroStatus = document.getElementById("filtro-status");
 
-const listaRanking = document.getElementById("lista-ranking")
+const listaRanking = document.getElementById("lista-ranking");
+
+const formularioBloqueio = document.getElementById("form-bloqueio");
+
+const selectBloqueioBarbeiro = document.getElementById("bloqueio-barbeiro");
+
+const campoBloqueioBarbeiro = document.getElementById(
+  "campo-bloqueio-barbeiro",
+);
+
+const campoBloqueioData = document.getElementById("bloqueio-data");
+
+const campoBloqueioDiaInteiro = document.getElementById("bloqueio-dia-inteiro");
+
+const campoBloqueioInicio = document.getElementById("bloqueio-inicio");
+
+const campoBloqueioFim = document.getElementById("bloqueio-fim");
+
+const campoBloqueioMotivo = document.getElementById("bloqueio-motivo");
+
+const mensagemBloqueio = document.getElementById("mensagem-bloqueio");
+
+const listaBloqueios = document.getElementById("lista-bloqueios");
 
 let agendamentos = [];
 
@@ -50,14 +92,19 @@ async function carregarfiltroBarbeiros() {
     opcao.dataset.id = barbeiro.id;
 
     filtroBarbeiro.appendChild(opcao);
+
+    const opcaoBloqueio = document.createElement("option");
+
+    opcaoBloqueio.value = barbeiro.id;
+    opcaoBloqueio.textContent = barbeiro.nome;
+
+    selectBloqueioBarbeiro.appendChild(opcaoBloqueio);
   }
 }
 
-carregarfiltroBarbeiros();
-
 async function carregarAgendamentos() {
   const { data: agendamentosDoBanco, error } = await clienteSupabase.rpc(
-    "listar_agendamentos_admin",
+    "listar_agendamentos_painel",
   );
 
   if (error) {
@@ -95,17 +142,14 @@ async function carregarAgendamentos() {
   filtrarAgendamentos();
 }
 
-carregarAgendamentos();
-
 async function carregarRanking() {
   const { data: ranking, error } = await clienteSupabase.rpc(
-    "listar_ranking_mensal",
+    "listar_ranking_pontos",
   );
 
   if (error) {
     console.error("Erro ao carregar o ranking:", error);
-    listaRanking.innerHTML =
-      `<p class="agenda-vazia">Não foi possível carregar o ranking.</p>`;
+    listaRanking.innerHTML = `<p class="agenda-vazia">Não foi possível carregar o ranking.</p>`;
     return;
   }
 
@@ -120,8 +164,8 @@ async function carregarRanking() {
     const temPontos = Number(item.total_pontos) > 0;
 
     if (temPontos && Number(item.posicao) === 1) {
-  card.classList.add("ranking-lider");
-}
+      card.classList.add("ranking-lider");
+    }
 
     const posicao = document.createElement("span");
     posicao.classList.add("ranking-posicao");
@@ -132,9 +176,9 @@ async function carregarRanking() {
       3: "🥉",
     };
 
-   posicao.textContent = temPontos
-  ? medalhas[item.posicao] || `${item.posicao}º`
-  : "—";
+    posicao.textContent = temPontos
+      ? medalhas[item.posicao] || `${item.posicao}º`
+      : "—";
 
     const informacoes = document.createElement("div");
     informacoes.classList.add("ranking-informacoes");
@@ -142,12 +186,11 @@ async function carregarRanking() {
     const nome = document.createElement("h3");
     nome.textContent = item.barbeiro_nome;
 
+    const detalhes = document.createElement("p");
 
-   const detalhes = document.createElement("p");
-
-detalhes.textContent =
-  `${item.total_pontos} pontos • ` +
-  `${item.total_atendimentos} atendimento(s)`;
+    detalhes.textContent =
+      `${item.total_pontos} pontos • ` +
+      `${item.total_atendimentos} atendimento(s)`;
 
     informacoes.appendChild(nome);
     informacoes.appendChild(detalhes);
@@ -158,8 +201,6 @@ detalhes.textContent =
     listaRanking.appendChild(card);
   }
 }
-
-carregarRanking();
 
 async function atualizarStatusAgendamento(agendamentoId, novoStatus) {
   const { error } = await clienteSupabase.rpc("atualizar_status_agendamento", {
@@ -196,23 +237,23 @@ function exibirAgendamentos(lista) {
   }
 
   for (let i = 0; i < lista.length; i++) {
-  const agendamento = lista[i];
+    const agendamento = lista[i];
 
-  const card = document.createElement("article");
-  card.classList.add("card-agenda");
+    const card = document.createElement("article");
+    card.classList.add("card-agenda");
 
-  const titulo = document.createElement("h2");
-  titulo.textContent = `${agendamento.horario} - ${agendamento.nome}`;
+    const titulo = document.createElement("h2");
+    titulo.textContent = `${agendamento.horario} - ${agendamento.nome}`;
 
-  const detalhes = document.createElement("p");
-  detalhes.classList.add("detalhes-agenda");
+    const detalhes = document.createElement("p");
+    detalhes.classList.add("detalhes-agenda");
 
-  detalhes.textContent =
-  `${agendamento.barbeiro} • ` +
-  `${agendamento.servico} • ` +
-  `${agendamento.categoria}`;
+    detalhes.textContent =
+      `${agendamento.barbeiro} • ` +
+      `${agendamento.servico} • ` +
+      `${agendamento.categoria}`;
 
-  const contato = document.createElement("p");
+    const contato = document.createElement("p");
 
     contato.classList.add("contato-agenda");
 
@@ -290,8 +331,6 @@ function filtrarAgendamentos() {
       statusSelecionado === "" || statusDoItem === statusSelecionado;
 
     return correspondeData && correspondeBarbeiro && correspondeStatus;
-
-
   });
 
   agendamentosFiltrados.sort(function (primeiro, segundo) {
@@ -320,3 +359,126 @@ const diaAtual = String(hoje.getDate()).padStart(2, "0");
 const dataHoje = `${anoAtual}-${mesAtual}-${diaAtual}`;
 
 filtroData.value = dataHoje;
+campoBloqueioData.min = dataHoje;
+campoBloqueioData.value = dataHoje;
+
+async function iniciarAgenda() {
+  const acessoLiberado = await verificarAutenticacao();
+
+  if (!acessoLiberado) {
+    return;
+  }
+
+  if (perfilUsuario.tipo === "admin") {
+    await carregarfiltroBarbeiros();
+  } else {
+    configurarInterfaceBarbeiro();
+  }
+
+  await carregarAgendamentos();
+  await carregarRanking();
+}
+
+function configurarInterfaceBarbeiro() {
+  filtroBarbeiro.innerHTML = "";
+
+  const opcao = document.createElement("option");
+
+  opcao.value = perfilUsuario.nome;
+  opcao.textContent = perfilUsuario.nome;
+
+  filtroBarbeiro.appendChild(opcao);
+  filtroBarbeiro.value = perfilUsuario.nome;
+
+  const campoFiltroBarbeiro = filtroBarbeiro.closest(".campo");
+
+  campoFiltroBarbeiro.hidden = true;
+
+  selectBloqueioBarbeiro.innerHTML = "";
+
+  const opcaoBloqueio = document.createElement("option");
+
+  opcaoBloqueio.value = perfilUsuario.barbeiro_id;
+  opcaoBloqueio.textContent = perfilUsuario.nome;
+
+  selectBloqueioBarbeiro.appendChild(opcaoBloqueio);
+  selectBloqueioBarbeiro.value = perfilUsuario.barbeiro_id;
+
+  campoBloqueioBarbeiro.hidden = true;
+}
+
+function atualizarCamposHorarioBloqueio() {
+  const bloquearDiaInteiro = campoBloqueioDiaInteiro.checked;
+
+  campoBloqueioInicio.disabled = bloquearDiaInteiro;
+  campoBloqueioFim.disabled = bloquearDiaInteiro;
+
+  campoBloqueioInicio.required = !bloquearDiaInteiro;
+  campoBloqueioFim.required = !bloquearDiaInteiro;
+
+  if (bloquearDiaInteiro) {
+    campoBloqueioInicio.value = "";
+    campoBloqueioFim.value = "";
+  }
+}
+
+campoBloqueioDiaInteiro.addEventListener(
+  "change",
+  atualizarCamposHorarioBloqueio,
+);
+
+formularioBloqueio.addEventListener("submit", async function (evento) {
+  evento.preventDefault();
+
+  const barbeiroId = Number(selectBloqueioBarbeiro.value);
+  const dataBloqueio = campoBloqueioData.value;
+  const diaInteiro = campoBloqueioDiaInteiro.checked;
+
+  const horarioInicio = diaInteiro ? null : campoBloqueioInicio.value;
+
+  const horarioFim = diaInteiro ? null : campoBloqueioFim.value;
+
+  const motivo = campoBloqueioMotivo.value.trim();
+
+  const botaoEnviar = formularioBloqueio.querySelector('button[type="submit"]');
+
+  mensagemBloqueio.textContent = "Salvando bloqueio...";
+  botaoEnviar.disabled = true;
+
+  const { data: bloqueioId, error } = await clienteSupabase.rpc(
+    "criar_bloqueio",
+    {
+      p_barbeiro_id: barbeiroId,
+      p_data: dataBloqueio,
+      p_dia_inteiro: diaInteiro,
+      p_horario_inicio: horarioInicio,
+      p_horario_fim: horarioFim,
+      p_motivo: motivo,
+    },
+  );
+
+  botaoEnviar.disabled = false;
+
+  if (error) {
+    console.error("Erro ao criar bloqueio:", error);
+    mensagemBloqueio.textContent = error.message;
+    return;
+  }
+
+  console.log("Bloqueio criado:", bloqueioId);
+
+  mensagemBloqueio.textContent = "Bloqueio adicionado com sucesso!";
+
+  formularioBloqueio.reset();
+  campoBloqueioData.value = dataHoje;
+
+  if (perfilUsuario.tipo === "barbeiro") {
+    selectBloqueioBarbeiro.value = perfilUsuario.barbeiro_id;
+  }
+
+  atualizarCamposHorarioBloqueio();
+});
+
+atualizarCamposHorarioBloqueio();
+
+iniciarAgenda();

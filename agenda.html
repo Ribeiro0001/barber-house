@@ -55,6 +55,64 @@
         <p id="resumo-agenda" class="resumo-agenda"></p>
         <div id="lista-agendamentos" class="lista-agendamentos"></div>
       </section>
+
+      <section class="painel-bloqueios">
+  <div class="cabecalho-bloqueios">
+    <p class="destaque">DISPONIBILIDADE</p>
+    <h2>Bloqueio de horários</h2>
+    <p>Cadastre folgas ou períodos em que você não poderá atender.</p>
+  </div>
+
+  <form id="form-bloqueio">
+    <div class="campo" id="campo-bloqueio-barbeiro">
+      <label for="bloqueio-barbeiro">Barbeiro</label>
+
+      <select id="bloqueio-barbeiro" required>
+        <option value="">Selecione o barbeiro</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="bloqueio-data">Data</label>
+      <input type="date" id="bloqueio-data" required />
+    </div>
+
+    <div class="campo campo-checkbox">
+      <label for="bloqueio-dia-inteiro">
+        <input type="checkbox" id="bloqueio-dia-inteiro" />
+        Bloquear o dia inteiro
+      </label>
+    </div>
+
+    <div class="campo campo-horario-bloqueio">
+      <label for="bloqueio-inicio">Horário inicial</label>
+      <input type="time" id="bloqueio-inicio" />
+    </div>
+
+    <div class="campo campo-horario-bloqueio">
+      <label for="bloqueio-fim">Horário final</label>
+      <input type="time" id="bloqueio-fim" />
+    </div>
+
+    <div class="campo campo-completo">
+      <label for="bloqueio-motivo">Motivo</label>
+      <input
+        type="text"
+        id="bloqueio-motivo"
+        maxlength="120"
+        placeholder="Ex.: folga, compromisso ou curso"
+      />
+    </div>
+
+    <button type="submit">Adicionar bloqueio</button>
+
+    <p id="mensagem-bloqueio" aria-live="polite"></p>
+  </form>
+
+  <div id="lista-bloqueios" class="lista-bloqueios">
+    <p class="agenda-vazia">Carregando bloqueios...</p>
+  </div>
+</section>
       
       <section class="painel-ranking">
         <div class="cabecalho-ranking">
