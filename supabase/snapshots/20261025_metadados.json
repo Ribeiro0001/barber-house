@@ -1,0 +1,4386 @@
+{
+  "tipos": [],
+  "views": [],
+  "colunas": [
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 1,
+      "sequencia": "public.\"Agendamentos_id_seq\"",
+      "identidade": "d",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome_cliente",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "telefone",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "barbeiro_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "servico_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "data",
+      "tipo": "date",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "horario_inicio",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "horario_fim",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 8,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "duracao_minutos",
+      "tipo": "integer",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 9,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "preco_cobrado",
+      "tipo": "numeric",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 10,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "pontos_gerados",
+      "tipo": "integer",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 11,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "categoria",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 12,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "status",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 13,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 14,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "assinatura_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "agendamentos",
+      "posicao": 15,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 1,
+      "sequencia": "public.assinaturas_id_seq",
+      "identidade": "a",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "cliente_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "plano_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "data_inicio",
+      "tipo": "date",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "CURRENT_DATE"
+    },
+    {
+      "acl": null,
+      "nome": "data_fim",
+      "tipo": "date",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "status",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "'ativa'::text"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "assinaturas",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 1,
+      "sequencia": "public.atendimentos_id_seq",
+      "identidade": "a",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "agendamento_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "barbeiro_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "servico_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome_cliente",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "categoria",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "'avulso'::text"
+    },
+    {
+      "acl": null,
+      "nome": "preco_cobrado",
+      "tipo": "numeric(10,2)",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "0"
+    },
+    {
+      "acl": null,
+      "nome": "pontos_gerados",
+      "tipo": "integer",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 8,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "0"
+    },
+    {
+      "acl": null,
+      "nome": "realizado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 9,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "atendimentos",
+      "posicao": 10,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "barbeiros",
+      "posicao": 1,
+      "sequencia": "public.barbeiros_id_seq",
+      "identidade": "d",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "barbeiros",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "barbeiros",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "barbeiros",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "whatsapp",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "barbeiros",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 1,
+      "sequencia": "public.bloqueios_id_seq",
+      "identidade": "d",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "barbeiro_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "data",
+      "tipo": "date",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "dia_inteiro",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "false"
+    },
+    {
+      "acl": null,
+      "nome": "horario_inicio",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "horario_fim",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "motivo",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 8,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "bloqueios",
+      "posicao": 9,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "clientes",
+      "posicao": 1,
+      "sequencia": "public.clientes_id_seq",
+      "identidade": "a",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "clientes",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "telefone",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "clientes",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "clientes",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "clientes",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 1,
+      "sequencia": "public.horarios_trabalho_id_seq",
+      "identidade": "d",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "barbeiro_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "dia_semana",
+      "tipo": "smallint",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "horario_inicio",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "horario_fim",
+      "tipo": "time without time zone",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "horarios_trabalho",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 1,
+      "sequencia": "public.pagamentos_planos_id_seq",
+      "identidade": "a",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "assinatura_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "valor_pago",
+      "tipo": "numeric(10,2)",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "mes_referencia",
+      "tipo": "date",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "data_pagamento",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "forma_pagamento",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "status",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "'pago'::text"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "pagamentos_planos",
+      "posicao": 8,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "usuario_id",
+      "tipo": "uuid",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 1,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "tipo",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "barbeiro_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "perfis",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "plano_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "plano_servicos",
+      "posicao": 1,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "servico_id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "plano_servicos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "plano_servicos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "valor_desconto",
+      "tipo": "numeric(10,2)",
+      "gerada": "",
+      "tabela": "plano_servicos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "0"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 1,
+      "sequencia": "public.planos_id_seq",
+      "identidade": "a",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "preco_mensal",
+      "tipo": "numeric(10,2)",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "descricao",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": false,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "planos",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "id",
+      "tipo": "bigint",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 1,
+      "sequencia": "public.\"Servicos_id_seq\"",
+      "identidade": "d",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "nome",
+      "tipo": "text",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 2,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "duracao_minutos",
+      "tipo": "integer",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 3,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "preco",
+      "tipo": "numeric",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 4,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": null
+    },
+    {
+      "acl": null,
+      "nome": "pontos",
+      "tipo": "integer",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 5,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "1"
+    },
+    {
+      "acl": null,
+      "nome": "ativo",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 6,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    },
+    {
+      "acl": null,
+      "nome": "criado_em",
+      "tipo": "timestamp with time zone",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 7,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "now()"
+    },
+    {
+      "acl": null,
+      "nome": "agendavel_online",
+      "tipo": "boolean",
+      "gerada": "",
+      "tabela": "servicos",
+      "posicao": 8,
+      "sequencia": null,
+      "identidade": "",
+      "obrigatoria": true,
+      "padrao_ou_expressao": "true"
+    }
+  ],
+  "indices": [
+    {
+      "indexdef": "CREATE UNIQUE INDEX \"Agendamentos_pkey\" ON public.agendamentos USING btree (id)",
+      "indexname": "Agendamentos_pkey",
+      "tablename": "agendamentos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX assinaturas_pkey ON public.assinaturas USING btree (id)",
+      "indexname": "assinaturas_pkey",
+      "tablename": "assinaturas",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX atendimentos_agendamento_id_key ON public.atendimentos USING btree (agendamento_id)",
+      "indexname": "atendimentos_agendamento_id_key",
+      "tablename": "atendimentos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX atendimentos_pkey ON public.atendimentos USING btree (id)",
+      "indexname": "atendimentos_pkey",
+      "tablename": "atendimentos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX barbeiros_pkey ON public.barbeiros USING btree (id)",
+      "indexname": "barbeiros_pkey",
+      "tablename": "barbeiros",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX bloqueios_pkey ON public.bloqueios USING btree (id)",
+      "indexname": "bloqueios_pkey",
+      "tablename": "bloqueios",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX clientes_pkey ON public.clientes USING btree (id)",
+      "indexname": "clientes_pkey",
+      "tablename": "clientes",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX clientes_telefone_key ON public.clientes USING btree (telefone)",
+      "indexname": "clientes_telefone_key",
+      "tablename": "clientes",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX horarios_trabalho_pkey ON public.horarios_trabalho USING btree (id)",
+      "indexname": "horarios_trabalho_pkey",
+      "tablename": "horarios_trabalho",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX pagamentos_planos_assinatura_id_mes_referencia_key ON public.pagamentos_planos USING btree (assinatura_id, mes_referencia)",
+      "indexname": "pagamentos_planos_assinatura_id_mes_referencia_key",
+      "tablename": "pagamentos_planos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX pagamentos_planos_pkey ON public.pagamentos_planos USING btree (id)",
+      "indexname": "pagamentos_planos_pkey",
+      "tablename": "pagamentos_planos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX perfis_barbeiro_id_key ON public.perfis USING btree (barbeiro_id)",
+      "indexname": "perfis_barbeiro_id_key",
+      "tablename": "perfis",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX perfis_pkey ON public.perfis USING btree (usuario_id)",
+      "indexname": "perfis_pkey",
+      "tablename": "perfis",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX plano_servicos_pkey ON public.plano_servicos USING btree (plano_id, servico_id)",
+      "indexname": "plano_servicos_pkey",
+      "tablename": "plano_servicos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX planos_nome_key ON public.planos USING btree (nome)",
+      "indexname": "planos_nome_key",
+      "tablename": "planos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX planos_pkey ON public.planos USING btree (id)",
+      "indexname": "planos_pkey",
+      "tablename": "planos",
+      "schemaname": "public",
+      "tablespace": null
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX \"Servicos_pkey\" ON public.servicos USING btree (id)",
+      "indexname": "Servicos_pkey",
+      "tablename": "servicos",
+      "schemaname": "public",
+      "tablespace": null
+    }
+  ],
+  "tabelas": [
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "agendamentos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "assinaturas",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "atendimentos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "nome": "barbeiros",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "nome": "bloqueios",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "clientes",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "nome": "horarios_trabalho",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "pagamentos_planos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=arwdDxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "perfis",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "plano_servicos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "nome": "planos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "nome": "servicos",
+      "tipo": "r",
+      "rls_forcado": false,
+      "proprietario": "postgres",
+      "rls_habilitado": true
+    }
+  ],
+  "triggers": [
+    {
+      "nome": "trg_registrar_atendimento_concluido",
+      "tabela": "agendamentos",
+      "definicao": "CREATE TRIGGER trg_registrar_atendimento_concluido AFTER UPDATE OF status ON agendamentos FOR EACH ROW EXECUTE FUNCTION registrar_atendimento_concluido()",
+      "habilitacao": "O"
+    },
+    {
+      "nome": "trg_validar_novo_agendamento",
+      "tabela": "agendamentos",
+      "definicao": "CREATE TRIGGER trg_validar_novo_agendamento BEFORE INSERT ON agendamentos FOR EACH ROW EXECUTE FUNCTION validar_novo_agendamento()",
+      "habilitacao": "O"
+    }
+  ],
+  "extensoes": [
+    {
+      "nome": "pg_stat_statements",
+      "versao": "1.11",
+      "esquema": "extensions"
+    },
+    {
+      "nome": "pgcrypto",
+      "versao": "1.3",
+      "esquema": "extensions"
+    },
+    {
+      "nome": "plpgsql",
+      "versao": "1.0",
+      "esquema": "pg_catalog"
+    },
+    {
+      "nome": "supabase_vault",
+      "versao": "0.3.1",
+      "esquema": "vault"
+    },
+    {
+      "nome": "uuid-ossp",
+      "versao": "1.1",
+      "esquema": "extensions"
+    }
+  ],
+  "politicas": [
+    {
+      "cmd": "SELECT",
+      "qual": "(ativo = true)",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "tablename": "barbeiros",
+      "permissive": "PERMISSIVE",
+      "policyname": "publico_visualiza_barbeiros_ativos",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "usuario_eh_admin()",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "perfis",
+      "permissive": "PERMISSIVE",
+      "policyname": "perfis_admin_atualizar",
+      "schemaname": "public",
+      "with_check": "usuario_eh_admin()"
+    },
+    {
+      "cmd": "DELETE",
+      "qual": "usuario_eh_admin()",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "perfis",
+      "permissive": "PERMISSIVE",
+      "policyname": "perfis_admin_excluir",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "perfis",
+      "permissive": "PERMISSIVE",
+      "policyname": "perfis_admin_inserir",
+      "schemaname": "public",
+      "with_check": "usuario_eh_admin()"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "((usuario_id = auth.uid()) OR usuario_eh_admin())",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "perfis",
+      "permissive": "PERMISSIVE",
+      "policyname": "perfis_ler_proprio_ou_admin",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(ativo = true)",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "tablename": "servicos",
+      "permissive": "PERMISSIVE",
+      "policyname": "publico_visualiza_servicos_ativos",
+      "schemaname": "public",
+      "with_check": null
+    }
+  ],
+  "restricoes": [
+    {
+      "nome": "Agendamentos_barbeiro_id_fkey",
+      "tipo": "f",
+      "tabela": "agendamentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (barbeiro_id) REFERENCES barbeiros(id)"
+    },
+    {
+      "nome": "Agendamentos_pkey",
+      "tipo": "p",
+      "tabela": "agendamentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "Agendamentos_servico_id_fkey",
+      "tipo": "f",
+      "tabela": "agendamentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (servico_id) REFERENCES servicos(id)"
+    },
+    {
+      "nome": "agendamentos_assinatura_id_fkey",
+      "tipo": "f",
+      "tabela": "agendamentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (assinatura_id) REFERENCES assinaturas(id)"
+    },
+    {
+      "nome": "assinaturas_check",
+      "tipo": "c",
+      "tabela": "assinaturas",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (data_fim >= data_inicio)"
+    },
+    {
+      "nome": "assinaturas_cliente_id_fkey",
+      "tipo": "f",
+      "tabela": "assinaturas",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (cliente_id) REFERENCES clientes(id)"
+    },
+    {
+      "nome": "assinaturas_pkey",
+      "tipo": "p",
+      "tabela": "assinaturas",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "assinaturas_plano_id_fkey",
+      "tipo": "f",
+      "tabela": "assinaturas",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (plano_id) REFERENCES planos(id)"
+    },
+    {
+      "nome": "assinaturas_status_check",
+      "tipo": "c",
+      "tabela": "assinaturas",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (status = ANY (ARRAY['ativa'::text, 'cancelada'::text, 'expirada'::text]))"
+    },
+    {
+      "nome": "atendimentos_agendamento_id_fkey",
+      "tipo": "f",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (agendamento_id) REFERENCES agendamentos(id) ON DELETE SET NULL"
+    },
+    {
+      "nome": "atendimentos_agendamento_id_key",
+      "tipo": "u",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "UNIQUE (agendamento_id)"
+    },
+    {
+      "nome": "atendimentos_barbeiro_id_fkey",
+      "tipo": "f",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (barbeiro_id) REFERENCES barbeiros(id)"
+    },
+    {
+      "nome": "atendimentos_categoria_check",
+      "tipo": "c",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (categoria = ANY (ARRAY['avulso'::text, 'plano'::text]))"
+    },
+    {
+      "nome": "atendimentos_pkey",
+      "tipo": "p",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "atendimentos_pontos_gerados_check",
+      "tipo": "c",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (pontos_gerados >= 0)"
+    },
+    {
+      "nome": "atendimentos_preco_cobrado_check",
+      "tipo": "c",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (preco_cobrado >= 0::numeric)"
+    },
+    {
+      "nome": "atendimentos_servico_id_fkey",
+      "tipo": "f",
+      "tabela": "atendimentos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (servico_id) REFERENCES servicos(id)"
+    },
+    {
+      "nome": "barbeiros_pkey",
+      "tipo": "p",
+      "tabela": "barbeiros",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "bloqueios_barbeiro_id_fkey",
+      "tipo": "f",
+      "tabela": "bloqueios",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (barbeiro_id) REFERENCES barbeiros(id)"
+    },
+    {
+      "nome": "bloqueios_pkey",
+      "tipo": "p",
+      "tabela": "bloqueios",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "clientes_pkey",
+      "tipo": "p",
+      "tabela": "clientes",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "clientes_telefone_key",
+      "tipo": "u",
+      "tabela": "clientes",
+      "dominio": null,
+      "validada": true,
+      "definicao": "UNIQUE (telefone)"
+    },
+    {
+      "nome": "horarios_trabalho_barbeiro_id_fkey",
+      "tipo": "f",
+      "tabela": "horarios_trabalho",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (barbeiro_id) REFERENCES barbeiros(id)"
+    },
+    {
+      "nome": "horarios_trabalho_pkey",
+      "tipo": "p",
+      "tabela": "horarios_trabalho",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "pagamentos_planos_assinatura_id_fkey",
+      "tipo": "f",
+      "tabela": "pagamentos_planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (assinatura_id) REFERENCES assinaturas(id)"
+    },
+    {
+      "nome": "pagamentos_planos_assinatura_id_mes_referencia_key",
+      "tipo": "u",
+      "tabela": "pagamentos_planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "UNIQUE (assinatura_id, mes_referencia)"
+    },
+    {
+      "nome": "pagamentos_planos_pkey",
+      "tipo": "p",
+      "tabela": "pagamentos_planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "pagamentos_planos_status_check",
+      "tipo": "c",
+      "tabela": "pagamentos_planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (status = ANY (ARRAY['pendente'::text, 'pago'::text, 'estornado'::text]))"
+    },
+    {
+      "nome": "pagamentos_planos_valor_pago_check",
+      "tipo": "c",
+      "tabela": "pagamentos_planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (valor_pago > 0::numeric)"
+    },
+    {
+      "nome": "perfil_barbeiro_vinculado",
+      "tipo": "c",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (tipo <> 'barbeiro'::text OR barbeiro_id IS NOT NULL)"
+    },
+    {
+      "nome": "perfis_barbeiro_id_fkey",
+      "tipo": "f",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (barbeiro_id) REFERENCES barbeiros(id) ON DELETE SET NULL"
+    },
+    {
+      "nome": "perfis_barbeiro_id_key",
+      "tipo": "u",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "UNIQUE (barbeiro_id)"
+    },
+    {
+      "nome": "perfis_pkey",
+      "tipo": "p",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (usuario_id)"
+    },
+    {
+      "nome": "perfis_tipo_check",
+      "tipo": "c",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (tipo = ANY (ARRAY['admin'::text, 'barbeiro'::text]))"
+    },
+    {
+      "nome": "perfis_usuario_id_fkey",
+      "tipo": "f",
+      "tabela": "perfis",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (usuario_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+    },
+    {
+      "nome": "plano_servicos_pkey",
+      "tipo": "p",
+      "tabela": "plano_servicos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (plano_id, servico_id)"
+    },
+    {
+      "nome": "plano_servicos_plano_id_fkey",
+      "tipo": "f",
+      "tabela": "plano_servicos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (plano_id) REFERENCES planos(id) ON DELETE CASCADE"
+    },
+    {
+      "nome": "plano_servicos_servico_id_fkey",
+      "tipo": "f",
+      "tabela": "plano_servicos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "FOREIGN KEY (servico_id) REFERENCES servicos(id) ON DELETE CASCADE"
+    },
+    {
+      "nome": "plano_servicos_valor_desconto_check",
+      "tipo": "c",
+      "tabela": "plano_servicos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (valor_desconto >= 0::numeric)"
+    },
+    {
+      "nome": "planos_nome_key",
+      "tipo": "u",
+      "tabela": "planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "UNIQUE (nome)"
+    },
+    {
+      "nome": "planos_pkey",
+      "tipo": "p",
+      "tabela": "planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    },
+    {
+      "nome": "planos_preco_mensal_check",
+      "tipo": "c",
+      "tabela": "planos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "CHECK (preco_mensal > 0::numeric)"
+    },
+    {
+      "nome": "Servicos_pkey",
+      "tipo": "p",
+      "tabela": "servicos",
+      "dominio": null,
+      "validada": true,
+      "definicao": "PRIMARY KEY (id)"
+    }
+  ],
+  "sequencias": [
+    {
+      "acl": null,
+      "nome": "Agendamentos_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "Servicos_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "assinaturas_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "atendimentos_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "barbeiros_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "bloqueios_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "clientes_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "horarios_trabalho_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "pagamentos_planos_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    },
+    {
+      "acl": null,
+      "nome": "planos_id_seq",
+      "tipo": "bigint",
+      "cache": 1,
+      "inicio": 1,
+      "maximo": 9223372036854775807,
+      "minimo": 1,
+      "ciclica": false,
+      "incremento": 1
+    }
+  ],
+  "esquema_public": {
+    "acl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner}",
+    "proprietario": "pg_database_owner",
+    "anon_pode_usar": true,
+    "authenticated_pode_usar": true
+  },
+  "versao_postgres": "17.6",
+  "permissoes_padrao": [
+    {
+      "acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+      "esquema": "public",
+      "tipo_objeto": "S",
+      "proprietario": "supabase_admin"
+    },
+    {
+      "acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+      "esquema": "public",
+      "tipo_objeto": "f",
+      "proprietario": "supabase_admin"
+    },
+    {
+      "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+      "esquema": "public",
+      "tipo_objeto": "r",
+      "proprietario": "supabase_admin"
+    },
+    {
+      "acl": "{postgres=rwU/postgres}",
+      "esquema": "public",
+      "tipo_objeto": "S",
+      "proprietario": "postgres"
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "esquema": "public",
+      "tipo_objeto": "f",
+      "proprietario": "postgres"
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=Dxtm/postgres,authenticated=Dxtm/postgres,service_role=Dxtm/postgres}",
+      "esquema": "public",
+      "tipo_objeto": "r",
+      "proprietario": "postgres"
+    }
+  ],
+  "permissoes_funcoes": [
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "atualizar_status_agendamento",
+      "argumentos": "p_agendamento_id bigint, p_status text",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+      "nome": "criar_agendamento",
+      "argumentos": "p_nome_cliente text, p_telefone text, p_barbeiro_id bigint, p_servico_id bigint, p_data date, p_horario_inicio time without time zone, p_categoria text",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+      "nome": "criar_agendamento_com_resumo",
+      "argumentos": "p_nome_cliente text, p_telefone text, p_barbeiro_id bigint, p_servico_id bigint, p_data date, p_horario_inicio time without time zone, p_categoria text",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "criar_bloqueio",
+      "argumentos": "p_barbeiro_id bigint, p_data date, p_dia_inteiro boolean, p_horario_inicio time without time zone, p_horario_fim time without time zone, p_motivo text",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "desativar_bloqueio",
+      "argumentos": "p_bloqueio_id bigint",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "nome": "listar_agendamentos_admin",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": false
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "listar_agendamentos_painel",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "listar_bloqueios_painel",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+      "nome": "listar_horarios_disponiveis",
+      "argumentos": "p_barbeiro_id bigint, p_servico_id bigint, p_data date",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+      "nome": "listar_horarios_ocupados",
+      "argumentos": "p_barbeiro_id bigint, p_data date",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "nome": "listar_ranking_mensal",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": false
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "listar_ranking_pontos",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": null,
+      "nome": "registrar_atendimento_concluido",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": null,
+      "nome": "rls_auto_enable",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "nome": "usuario_eh_admin",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": false,
+      "authenticated_pode_executar": true
+    },
+    {
+      "acl": null,
+      "nome": "validar_novo_agendamento",
+      "argumentos": "",
+      "proprietario": "postgres",
+      "security_definer": true,
+      "anon_pode_executar": true,
+      "authenticated_pode_executar": true
+    }
+  ],
+  "permissoes_tabelas": [
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "agendamentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "assinaturas",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "atendimentos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "barbeiros",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "bloqueios",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "clientes",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "horarios_trabalho",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "pagamentos_planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "perfis",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "plano_servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "planos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "YES",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "DELETE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "INSERT",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "REFERENCES",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "SELECT",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRIGGER",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "TRUNCATE",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "table_name": "servicos",
+      "is_grantable": "NO",
+      "table_schema": "public",
+      "table_catalog": "postgres",
+      "privilege_type": "UPDATE",
+      "with_hierarchy": "NO"
+    }
+  ],
+  "event_triggers_public": [
+    {
+      "nome": "ensure_rls",
+      "tags": [
+        "CREATE TABLE",
+        "CREATE TABLE AS",
+        "SELECT INTO"
+      ],
+      "evento": "ddl_command_end",
+      "funcao": "rls_auto_enable()",
+      "habilitacao": "O"
+    }
+  ]
+}
