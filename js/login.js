@@ -8,6 +8,25 @@ const mensagemLogin = document.getElementById("mensagem-login");
 
 const botaoEntrar = formularioLogin.querySelector('button[type="submit"]');
 
+async function verificarSessaoExistente() {
+  try {
+    const { data, error } = await clienteSupabase.auth.getSession();
+
+    if (error) {
+      console.error("Erro ao consultar sessão:", error);
+      return;
+    }
+
+    if (data.session) {
+      window.location.replace("agenda.html");
+    }
+  } catch (erro) {
+    console.error("Não foi possível consultar a sessão:", erro);
+  }
+}
+
+verificarSessaoExistente();
+
 formularioLogin.addEventListener("submit", async function (evento) {
   evento.preventDefault();
 
