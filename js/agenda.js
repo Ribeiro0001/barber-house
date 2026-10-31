@@ -71,6 +71,154 @@ let agendamentos = [];
 
 const botaoSair = document.getElementById("botao-sair");
 
+const modalConclusao = document.getElementById("modal-conclusao");
+const formularioConclusao = document.getElementById("form-conclusao");
+const servicoBaseConclusao = document.getElementById("servico-base-conclusao");
+const pontosConclusao = document.getElementById("pontos-conclusao");
+const mensagemConclusao = document.getElementById("mensagem-conclusao");
+const botaoVoltarConclusao = document.getElementById("cancelar-conclusao");
+const botaoConfirmarConclusao = document.getElementById("confirmar-conclusao");
+
+const camposAdicionais = formularioConclusao.querySelectorAll(
+  'input[name="adicionais"]',
+);
+
+const pontosAdicionais = {
+  pezinho: 10,
+  barba: 20,
+  sobrancelha: 10,
+};
+
+let agendamentoEmConclusao = null;
+
+let conclusaoEmAndamento = false;
+
+function atualizarPontosConclusao() {
+  if (!agendamentoEmConclusao) {
+    return;
+  }
+
+  if (agendamentoEmConclusao.categoria !== "plano") {
+    pontosConclusao.textContent = "Atendimento avulso: 0 pontos no ranking.";
+    return;
+  }
+
+  let totalPontos = Number(agendamentoEmConclusao.pontos);
+
+  for (const campo of camposAdicionais) {
+    if (campo.checked && !campo.disabled) {
+      totalPontos += pontosAdicionais[campo.value];
+    }
+  }
+
+  pontosConclusao.textContent = "Pontos previstos no ranking: " + totalPontos;
+}
+
+function abrirConclusao(agendamento) {
+  formularioConclusao.reset();
+  agendamentoEmConclusao = agendamento;
+  mensagemConclusao.textContent = "";
+  botaoConfirmarConclusao.disabled = false;
+
+  servicoBaseConclusao.textContent =
+    agendamento.nome + " — " + agendamento.servico;
+
+  const servicosIncluidos = agendamento.servico
+    .toLowerCase()
+    .split("+")
+    .map(function (parte) {
+      return parte.trim();
+    });
+
+  for (const campo of camposAdicionais) {
+    campo.disabled = servicosIncluidos.includes(campo.value);
+  }
+
+  atualizarPontosConclusao();
+  modalConclusao.showModal();
+}
+
+formularioConclusao.addEventListener("change", atualizarPontosConclusao);
+
+formularioConclusao.addEventListener("submit", async function (evento) {
+  evento.preventDefault();
+
+  if (!agendamentoEmConclusao || conclusaoEmAndamento) {
+    return;
+  }
+
+  const agendamentoId = agendamentoEmConclusao.id;
+  const adicionais = [];
+
+  for (const campo of camposAdicionais) {
+    if (campo.checked && !campo.disabled) {
+      adicionais.push(campo.value);
+    }
+  }
+
+  conclusaoEmAndamento = true;
+  botaoConfirmarConclusao.disabled = true;
+  botaoVoltarConclusao.disabled = true;
+  botaoConfirmarConclusao.textContent = "Concluindo...";
+  mensagemConclusao.textContent = "";
+
+  let conclusaoSalva = false;
+
+  try {
+    const { data: pontosConfirmados, error } = await clienteSupabase.rpc(
+      "concluir_agendamento_com_adicionais",
+      {
+        p_agendamento_id: agendamentoId,
+        p_adicionais: adicionais,
+      },
+    );
+
+    if (error) {
+      console.error("Erro ao concluir atendimento:", error);
+      mensagemConclusao.textContent = error.message;
+      return;
+    }
+
+    conclusaoSalva = true;
+    modalConclusao.close();
+
+    await carregarAgendamentos();
+    await carregarRanking();
+
+    resumoAgenda.textContent =
+      "Atendimento concluído! Pontos registrados: " + pontosConfirmados;
+  } catch (erro) {
+    console.error("Erro na conclusão:", erro);
+
+    if (conclusaoSalva) {
+      resumoAgenda.textContent =
+        "Atendimento concluído. Atualize a página para conferir o painel.";
+    } else {
+      mensagemConclusao.textContent =
+        "Não foi possível confirmar o resultado. Confira a agenda antes de tentar novamente.";
+    }
+  } finally {
+    conclusaoEmAndamento = false;
+    botaoConfirmarConclusao.disabled = false;
+    botaoVoltarConclusao.disabled = false;
+    botaoConfirmarConclusao.textContent = "Confirmar conclusão";
+  }
+});
+
+modalConclusao.addEventListener("cancel", function (evento) {
+  if (conclusaoEmAndamento) {
+    evento.preventDefault();
+  }
+});
+
+botaoVoltarConclusao.addEventListener("click", function () {
+  modalConclusao.close();
+});
+
+modalConclusao.addEventListener("close", function () {
+  agendamentoEmConclusao = null;
+});
+
 async function carregarfiltroBarbeiros() {
   const { data: barbeirosDoBanco, error } = await clienteSupabase
     .from("barbeiros")
@@ -87,7 +235,7 @@ async function carregarfiltroBarbeiros() {
 
     const opcao = document.createElement("option");
 
-    opcao.value = barbeiro.nome;
+    opcao.value = String(barbeiro.id);
     opcao.textContent = barbeiro.nome;
     opcao.dataset.id = barbeiro.id;
 
@@ -279,10 +427,8 @@ function exibirAgendamentos(lista) {
 
     botaoConcluir.classList.add("botao-concluir");
 
-    botaoConcluir.addEventListener("click", async function () {
-      botaoConcluir.disabled = true;
-
-      await atualizarStatusAgendamento(agendamento.id, "concluido");
+    botaoConcluir.addEventListener("click", function () {
+      abrirConclusao(agendamento);
     });
 
     const botaoCancelar = document.createElement("button");
@@ -323,7 +469,8 @@ function filtrarAgendamentos() {
       dataSelecionada === "" || item.data === dataSelecionada;
 
     const correspondeBarbeiro =
-      barbeiroSelecionado === "" || item.barbeiro === barbeiroSelecionado;
+      barbeiroSelecionado === "" ||
+      String(item.barbeiroId) === barbeiroSelecionado;
 
     const statusDoItem = item.status ? item.status.toLowerCase() : "";
 
@@ -384,11 +531,11 @@ function configurarInterfaceBarbeiro() {
 
   const opcao = document.createElement("option");
 
-  opcao.value = perfilUsuario.nome;
+  opcao.value = String(perfilUsuario.barbeiro_id);
   opcao.textContent = perfilUsuario.nome;
 
   filtroBarbeiro.appendChild(opcao);
-  filtroBarbeiro.value = perfilUsuario.nome;
+  filtroBarbeiro.value = String(perfilUsuario.barbeiro_id);
 
   const campoFiltroBarbeiro = filtroBarbeiro.closest(".campo");
 

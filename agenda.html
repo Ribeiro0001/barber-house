@@ -125,5 +125,43 @@
       </section>
       </div>
     </main>
+    <dialog id="modal-conclusao" aria-labelledby="titulo-conclusao">
+  <form id="form-conclusao">
+    <h2 id="titulo-conclusao">Concluir atendimento</h2>
+
+    <p id="servico-base-conclusao"></p>
+
+    <fieldset>
+      <legend>Teve algum serviço adicional?</legend>
+
+      <label>
+        <input type="checkbox" name="adicionais" value="pezinho" />
+        Pezinho (+10 pontos)
+      </label>
+
+      <label>
+        <input type="checkbox" name="adicionais" value="barba" />
+        Barba (+20 pontos)
+      </label>
+
+      <label>
+        <input type="checkbox" name="adicionais" value="sobrancelha" />
+        Sobrancelha (+10 pontos)
+      </label>
+    </fieldset>
+
+    <p id="pontos-conclusao" aria-live="polite"></p>
+
+    <p id="mensagem-conclusao" aria-live="polite"></p>
+
+    <button type="button" id="cancelar-conclusao">
+      Voltar
+    </button>
+
+    <button type="submit" id="confirmar-conclusao" disabled>
+      Confirmar conclusão
+    </button>
+  </form>
+</dialog>
   </body>
 </html>
