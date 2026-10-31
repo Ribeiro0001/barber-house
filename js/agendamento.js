@@ -18,6 +18,8 @@ const selectCategoria = document.getElementById("categoria");
 
 const cardAgendamento = document.querySelector(".card-agendamento");
 
+const botaoAgendar = document.getElementById("botao-agendar");
+
 const hoje = new Date();
 
 const ano = hoje.getFullYear();
@@ -193,109 +195,131 @@ async function atualizarHorarios() {
 
 formulario.addEventListener("submit", async function (evento) {
   evento.preventDefault();
-  linkWhatsapp.hidden = true;
-  linkWhatsapp.href = "#";
-  const nome = document.getElementById("nome").value;
-  const telefone = document.getElementById("telefone").value;
-  const servico = document.getElementById("servico").value;
-  const barbeiro = document.getElementById("barbeiro").value;
-  const horario = document.getElementById("horario").value;
-  const categoria = document.getElementById("categoria").value;
-  const data = document.getElementById("data").value;
 
-  const opcaoBarbeiroSelecionada =
-    selectBarbeiro.options[selectBarbeiro.selectedIndex];
-
-  const whatsappBarbeiro = opcaoBarbeiroSelecionada.dataset.whatsapp;
-  console.log("WhatsApp selecionado:", whatsappBarbeiro);
-
-  const opcaoServicoSelecionada =
-    selectServico.options[selectServico.selectedIndex];
-
-  const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
-  const servicoId = Number(opcaoServicoSelecionada.dataset.id);
-  const duracaoMinutos = Number(opcaoServicoSelecionada.dataset.duracao);
-  const preco = Number(opcaoServicoSelecionada.dataset.preco);
-  const pontos = Number(opcaoServicoSelecionada.dataset.pontos);
-  const horarioFim = calcularHorarioFim(horario, duracaoMinutos);
-
-  console.log({
-    barbeiroId,
-    servicoId,
-    duracaoMinutos,
-    preco,
-    pontos,
-    horarioFim,
-  });
-
-  const { data: agendamentoCriado, error } = await clienteSupabase.rpc(
-    "criar_agendamento_com_resumo",
-    {
-      p_nome_cliente: nome,
-      p_telefone: telefone,
-      p_barbeiro_id: barbeiroId,
-      p_servico_id: servicoId,
-      p_data: data,
-      p_horario_inicio: horario,
-      p_categoria: categoria,
-    },
-  );
-
-  if (error) {
-    console.error("Erro ao criar agendamento:", error);
-    mensagemFormulario.textContent = error.message;
-
+  if (botaoAgendar.disabled) {
     return;
   }
 
-  const resumoAgendamento = agendamentoCriado[0];
+  botaoAgendar.disabled = true;
+  botaoAgendar.textContent = "Salvando...";
 
-  const precoNormalFormatado = Number(
-    resumoAgendamento.preco_normal,
-  ).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  try {
+    linkWhatsapp.hidden = true;
+    linkWhatsapp.href = "#";
+    const nome = document.getElementById("nome").value;
+    const telefone = document.getElementById("telefone").value;
+    const servico = document.getElementById("servico").value;
+    const barbeiro = document.getElementById("barbeiro").value;
+    const horario = document.getElementById("horario").value;
+    const categoria = document.getElementById("categoria").value;
+    const data = document.getElementById("data").value;
 
-  const descontoFormatado = Number(
-    resumoAgendamento.valor_desconto,
-  ).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+    const opcaoBarbeiroSelecionada =
+      selectBarbeiro.options[selectBarbeiro.selectedIndex];
 
-  const valorCobradoFormatado = Number(
-    resumoAgendamento.valor_cobrado,
-  ).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+    const whatsappBarbeiro = opcaoBarbeiroSelecionada.dataset.whatsapp;
+    console.log("WhatsApp selecionado:", whatsappBarbeiro);
 
-  if (categoria === "plano") {
+    const opcaoServicoSelecionada =
+      selectServico.options[selectServico.selectedIndex];
+
+    const barbeiroId = Number(opcaoBarbeiroSelecionada.dataset.id);
+    const servicoId = Number(opcaoServicoSelecionada.dataset.id);
+    const duracaoMinutos = Number(opcaoServicoSelecionada.dataset.duracao);
+    const preco = Number(opcaoServicoSelecionada.dataset.preco);
+    const pontos = Number(opcaoServicoSelecionada.dataset.pontos);
+    const horarioFim = calcularHorarioFim(horario, duracaoMinutos);
+
+    console.log({
+      barbeiroId,
+      servicoId,
+      duracaoMinutos,
+      preco,
+      pontos,
+      horarioFim,
+    });
+
+    const { data: agendamentoCriado, error } = await clienteSupabase.rpc(
+      "criar_agendamento_com_resumo",
+      {
+        p_nome_cliente: nome,
+        p_telefone: telefone,
+        p_barbeiro_id: barbeiroId,
+        p_servico_id: servicoId,
+        p_data: data,
+        p_horario_inicio: horario,
+        p_categoria: categoria,
+      },
+    );
+
+    if (error) {
+      console.error("Erro ao criar agendamento:", error);
+      mensagemFormulario.textContent = error.message;
+
+      return;
+    }
+
+    const resumoAgendamento = agendamentoCriado[0];
+
+    const precoNormalFormatado = Number(
+      resumoAgendamento.preco_normal,
+    ).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    const descontoFormatado = Number(
+      resumoAgendamento.valor_desconto,
+    ).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    const valorCobradoFormatado = Number(
+      resumoAgendamento.valor_cobrado,
+    ).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    if (categoria === "plano") {
+      mensagemFormulario.textContent =
+        `Agendamento confirmado!\n` +
+        `Preço normal: ${precoNormalFormatado}\n` +
+        `Desconto do plano: ${descontoFormatado}\n` +
+        `Valor a pagar: ${valorCobradoFormatado}`;
+    } else {
+      mensagemFormulario.textContent = `Agendamento confirmado! Valor a pagar: ${valorCobradoFormatado}`;
+    }
+
+    const [anoAgendamento, mesAgendamento, diaAgendamento] = data.split("-");
+
+    const dataFormatada = `${diaAgendamento}/${mesAgendamento}/${anoAgendamento}`;
+
+    const mensagemWhatsapp =
+      `Olá, ${barbeiro}! Fiz um agendamento pela Barber House.\n\n` +
+      `Cliente: ${nome}\n` +
+      `Serviço: ${servico}\n` +
+      `Data: ${dataFormatada}\n` +
+      `Horário: ${horario}\n` +
+      `Valor: ${valorCobradoFormatado}`;
+
+    linkWhatsapp.href =
+      `https://wa.me/${whatsappBarbeiro}?text=` +
+      encodeURIComponent(mensagemWhatsapp);
+
+    linkWhatsapp.textContent = `Enviar confirmação para ${barbeiro}`;
+    linkWhatsapp.hidden = false;
+
+    formulario.reset();
+    atualizarHorarios();
+  } catch (erro) {
+    console.error("Erro inesperado no agendamento:", erro);
+
     mensagemFormulario.textContent =
-      `Agendamento confirmado!\n` +
-      `Preço normal: ${precoNormalFormatado}\n` +
-      `Desconto do plano: ${descontoFormatado}\n` +
-      `Valor a pagar: ${valorCobradoFormatado}`;
-  } else {
-    mensagemFormulario.textContent = `Agendamento confirmado! Valor a pagar: ${valorCobradoFormatado}`;
+      "Não foi possível confirmar o resultado. Confira no painel antes de tentar novamente.";
+  } finally {
+    botaoAgendar.disabled = false;
+    botaoAgendar.textContent = "Confirmar agendamento";
   }
-
-  const mensagemWhatsapp =
-    `Olá, ${barbeiro}! Fiz um agendamento pela Barber House.\n\n` +
-    `Cliente: ${nome}\n` +
-    `Serviço: ${servico}\n` +
-    `Data: ${dataFormatada}\n` +
-    `Horário: ${horario}\n` +
-    `Valor: ${precoFormatado}`;
-
-  linkWhatsapp.href =
-    `https://wa.me/${whatsappBarbeiro}?text=` +
-    encodeURIComponent(mensagemWhatsapp);
-
-  linkWhatsapp.textContent = `Enviar confirmação para ${barbeiro}`;
-  linkWhatsapp.hidden = false;
-
-  formulario.reset();
-  atualizarHorarios();
 });
