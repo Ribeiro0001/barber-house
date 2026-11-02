@@ -2,7 +2,7 @@
   "name": "barber-house-database-tests",
   "private": true,
   "scripts": {
-    "test": "node validar_banco.cjs"
+    "test": "node validar_banco.cjs && node validar_planos_30_dias.cjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "0.5.11"

@@ -524,6 +524,7 @@ async function iniciarAgenda() {
 
   await carregarAgendamentos();
   await carregarRanking();
+  await carregarPlanosPainel();
 }
 
 function configurarInterfaceBarbeiro() {
