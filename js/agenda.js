@@ -66,6 +66,14 @@ const campoBloqueioMotivo = document.getElementById("bloqueio-motivo");
 const mensagemBloqueio = document.getElementById("mensagem-bloqueio");
 
 const listaBloqueios = document.getElementById("lista-bloqueios");
+const botaoSalvarBloqueio = document.getElementById("salvar-bloqueio");
+const botaoAtualizarBloqueios = document.getElementById("atualizar-bloqueios");
+const camposHorarioBloqueio = formularioBloqueio.querySelectorAll(
+  ".campo-horario-bloqueio",
+);
+
+let salvandoBloqueio = false;
+let versaoListaBloqueios = 0;
 
 let agendamentos = [];
 
@@ -98,20 +106,38 @@ function atualizarPontosConclusao() {
     return;
   }
 
-  if (agendamentoEmConclusao.categoria !== "plano") {
-    pontosConclusao.textContent = "Atendimento avulso: 0 pontos no ranking.";
-    return;
-  }
-
-  let totalPontos = Number(agendamentoEmConclusao.pontos);
+  const peloPlano = agendamentoEmConclusao.categoria === "plano";
+  const cobertos = agendamentoEmConclusao.componentesCobertos;
+  let totalPontos = peloPlano ? Number(agendamentoEmConclusao.pontos) : 0;
+  let valorTotal = Number(agendamentoEmConclusao.preco);
+  let precoConfigurado = Number.isFinite(valorTotal);
 
   for (const campo of camposAdicionais) {
     if (campo.checked && !campo.disabled) {
-      totalPontos += pontosAdicionais[campo.value];
+      if (peloPlano && cobertos.includes(campo.value)) {
+        totalPontos += pontosAdicionais[campo.value];
+      }
+
+      const preco = agendamentoEmConclusao.precosAdicionais[campo.value];
+
+      if (preco === null || preco === undefined || !Number.isFinite(Number(preco))) {
+        precoConfigurado = false;
+      } else {
+        valorTotal += Number(preco);
+      }
     }
   }
 
-  pontosConclusao.textContent = "Pontos previstos no ranking: " + totalPontos;
+  const textoPontos = peloPlano
+    ? "Pontos do plano: " + totalPontos
+    : "Atendimento avulso: 0 pontos no ranking";
+  const textoValor = precoConfigurado
+    ? "Valor do atendimento: " + valorTotal.toLocaleString("pt-BR", {
+        style: "currency", currency: "BRL",
+      })
+    : "Preço de um adicional não configurado. Confira o cadastro.";
+
+  pontosConclusao.textContent = textoPontos + " • " + textoValor;
 }
 
 function abrirConclusao(agendamento) {
@@ -121,7 +147,8 @@ function abrirConclusao(agendamento) {
   botaoConfirmarConclusao.disabled = false;
 
   servicoBaseConclusao.textContent =
-    agendamento.nome + " — " + agendamento.servico;
+    agendamento.nome + " — " + agendamento.servico +
+    (agendamento.planoNome ? " | Plano " + agendamento.planoNome : "");
 
   const servicosIncluidos = agendamento.servico
     .toLowerCase()
@@ -252,7 +279,7 @@ async function carregarfiltroBarbeiros() {
 
 async function carregarAgendamentos() {
   const { data: agendamentosDoBanco, error } = await clienteSupabase.rpc(
-    "listar_agendamentos_painel",
+    "listar_agendamentos_painel_v2",
   );
 
   if (error) {
@@ -284,6 +311,10 @@ async function carregarAgendamentos() {
 
       preco: item.preco_cobrado,
       pontos: item.pontos_gerados,
+      componentesCobertos: Array.isArray(item.componentes_cobertos)
+        ? item.componentes_cobertos : [],
+      planoNome: item.plano_nome,
+      precosAdicionais: item.precos_adicionais || {},
     };
   });
 
@@ -407,6 +438,13 @@ function exibirAgendamentos(lista) {
 
     contato.textContent = `WhatsApp: ${agendamento.telefone}`;
 
+    const valorAtendimento = document.createElement("p");
+    valorAtendimento.classList.add("detalhes-agenda");
+    valorAtendimento.textContent = "Valor do atendimento: " +
+      Number(agendamento.preco).toLocaleString("pt-BR", {
+        style: "currency", currency: "BRL",
+      });
+
     const statusAgendamento = document.createElement("p");
 
     statusAgendamento.classList.add("status-agendamento");
@@ -448,6 +486,7 @@ function exibirAgendamentos(lista) {
     card.appendChild(titulo);
     card.appendChild(detalhes);
     card.appendChild(contato);
+    card.appendChild(valorAtendimento);
     card.appendChild(statusAgendamento);
 
     if (agendamento.status === "agendado") {
@@ -522,9 +561,20 @@ async function iniciarAgenda() {
     configurarInterfaceBarbeiro();
   }
 
-  await carregarAgendamentos();
-  await carregarRanking();
-  await carregarPlanosPainel();
+  botaoSalvarBloqueio.disabled = false;
+
+  const resultados = await Promise.allSettled([
+    carregarAgendamentos(),
+    carregarRanking(),
+    carregarPlanosPainel(),
+    carregarBloqueios(),
+  ]);
+
+  for (const resultado of resultados) {
+    if (resultado.status === "rejected") {
+      console.error("Erro ao iniciar uma parte do painel:", resultado.reason);
+    }
+  }
 }
 
 function configurarInterfaceBarbeiro() {
@@ -558,6 +608,10 @@ function configurarInterfaceBarbeiro() {
 function atualizarCamposHorarioBloqueio() {
   const bloquearDiaInteiro = campoBloqueioDiaInteiro.checked;
 
+  for (const campo of camposHorarioBloqueio) {
+    campo.hidden = bloquearDiaInteiro;
+  }
+
   campoBloqueioInicio.disabled = bloquearDiaInteiro;
   campoBloqueioFim.disabled = bloquearDiaInteiro;
 
@@ -575,58 +629,236 @@ campoBloqueioDiaInteiro.addEventListener(
   atualizarCamposHorarioBloqueio,
 );
 
+
+function mostrarAvisoBloqueios(texto) {
+  const aviso = document.createElement("p");
+  aviso.classList.add("agenda-vazia");
+  aviso.textContent = texto;
+  listaBloqueios.replaceChildren(aviso);
+}
+
+function textoErroBloqueio(erro, alternativa) {
+  return erro && erro.code === "P0001" && typeof erro.message === "string"
+    ? erro.message
+    : alternativa;
+}
+
+async function carregarBloqueios() {
+  const versao = ++versaoListaBloqueios;
+  botaoAtualizarBloqueios.disabled = true;
+  listaBloqueios.setAttribute("aria-busy", "true");
+  mostrarAvisoBloqueios("Carregando bloqueios...");
+
+  try {
+    const { data: bloqueios, error } = await clienteSupabase.rpc(
+      "listar_bloqueios_painel",
+    );
+
+    if (versao !== versaoListaBloqueios) {
+      return false;
+    }
+
+    if (error) {
+      throw error;
+    }
+
+    if (!Array.isArray(bloqueios)) {
+      throw new Error("Resposta de bloqueios inválida.");
+    }
+
+    if (bloqueios.length === 0) {
+      mostrarAvisoBloqueios("Nenhum bloqueio ativo a partir de hoje.");
+      return true;
+    }
+
+    const cards = [];
+
+    for (const bloqueio of bloqueios) {
+      const card = document.createElement("article");
+      card.classList.add("card-bloqueio");
+
+      const titulo = document.createElement("h4");
+      titulo.textContent = bloqueio.data.split("-").reverse().join("/");
+
+      const periodo = document.createElement("p");
+      periodo.classList.add("bloqueio-periodo");
+      periodo.textContent = bloqueio.dia_inteiro
+        ? "Dia inteiro"
+        : bloqueio.horario_inicio.slice(0, 5) + " às " +
+          bloqueio.horario_fim.slice(0, 5);
+
+      const barbeiro = document.createElement("p");
+      barbeiro.classList.add("bloqueio-barbeiro");
+      barbeiro.textContent = bloqueio.barbeiro_nome;
+
+      const motivo = document.createElement("p");
+      motivo.classList.add("bloqueio-motivo");
+      motivo.textContent = bloqueio.motivo || "Indisponível";
+
+      const botaoRemover = document.createElement("button");
+      botaoRemover.type = "button";
+      botaoRemover.classList.add("botao-remover-bloqueio");
+      botaoRemover.textContent = "Remover bloqueio";
+      botaoRemover.addEventListener("click", function () {
+        return removerBloqueio(bloqueio.id, botaoRemover);
+      });
+
+      card.append(titulo, periodo, barbeiro, motivo, botaoRemover);
+      cards.push(card);
+    }
+
+    listaBloqueios.replaceChildren(...cards);
+    return true;
+  } catch (erro) {
+    if (versao === versaoListaBloqueios) {
+      console.error("Erro ao carregar bloqueios:", erro);
+      mostrarAvisoBloqueios(
+        "Não foi possível carregar os bloqueios. Use o botão Atualizar.",
+      );
+    }
+    return false;
+  } finally {
+    if (versao === versaoListaBloqueios) {
+      listaBloqueios.setAttribute("aria-busy", "false");
+      botaoAtualizarBloqueios.disabled = false;
+    }
+  }
+}
+
+async function removerBloqueio(bloqueioId, botao) {
+  if (botao.disabled) {
+    return;
+  }
+
+  botao.disabled = true;
+  botao.textContent = "Removendo...";
+  mensagemBloqueio.textContent = "";
+
+  try {
+    const { data, error } = await clienteSupabase.rpc("desativar_bloqueio", {
+      p_bloqueio_id: bloqueioId,
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    if (String(data) !== String(bloqueioId)) {
+      throw new Error("Resposta de remoção incompleta.");
+    }
+
+    const listaAtualizada = await carregarBloqueios();
+    mensagemBloqueio.textContent = listaAtualizada
+      ? "Bloqueio removido com sucesso!"
+      : "Bloqueio removido. Use Atualizar para conferir a lista.";
+  } catch (erro) {
+    console.error("Erro ao remover bloqueio:", erro);
+    mensagemBloqueio.textContent = textoErroBloqueio(
+      erro,
+      "Não foi possível confirmar a remoção. Atualize a lista antes de tentar novamente.",
+    );
+  } finally {
+    botao.disabled = false;
+    botao.textContent = "Remover bloqueio";
+  }
+}
+
+botaoAtualizarBloqueios.addEventListener("click", carregarBloqueios);
+
 formularioBloqueio.addEventListener("submit", async function (evento) {
   evento.preventDefault();
 
-  const barbeiroId = Number(selectBloqueioBarbeiro.value);
+  if (salvandoBloqueio) {
+    return;
+  }
+
+  if (!perfilUsuario) {
+    mensagemBloqueio.textContent = "Aguarde a verificação do seu acesso.";
+    return;
+  }
+
+  if (!formularioBloqueio.reportValidity()) {
+    return;
+  }
+
+  const barbeiroId = Number(
+    perfilUsuario.tipo === "admin"
+      ? selectBloqueioBarbeiro.value
+      : perfilUsuario.barbeiro_id,
+  );
   const dataBloqueio = campoBloqueioData.value;
   const diaInteiro = campoBloqueioDiaInteiro.checked;
-
   const horarioInicio = diaInteiro ? null : campoBloqueioInicio.value;
-
   const horarioFim = diaInteiro ? null : campoBloqueioFim.value;
-
   const motivo = campoBloqueioMotivo.value.trim();
 
-  const botaoEnviar = formularioBloqueio.querySelector('button[type="submit"]');
+  if (!Number.isSafeInteger(barbeiroId) || barbeiroId <= 0) {
+    mensagemBloqueio.textContent = "Selecione um barbeiro válido.";
+    return;
+  }
 
+  if (!diaInteiro && (!horarioInicio || !horarioFim || horarioFim <= horarioInicio)) {
+    mensagemBloqueio.textContent = "O horário final precisa ser maior que o inicial.";
+    return;
+  }
+
+  const campos = formularioBloqueio.querySelectorAll("input, select");
+  salvandoBloqueio = true;
+  botaoSalvarBloqueio.disabled = true;
+  botaoSalvarBloqueio.textContent = "Salvando...";
   mensagemBloqueio.textContent = "Salvando bloqueio...";
-  botaoEnviar.disabled = true;
 
-  const { data: bloqueioId, error } = await clienteSupabase.rpc(
-    "criar_bloqueio",
-    {
+  for (const campo of campos) {
+    campo.disabled = true;
+  }
+
+  try {
+    const { data: bloqueioId, error } = await clienteSupabase.rpc("criar_bloqueio", {
       p_barbeiro_id: barbeiroId,
       p_data: dataBloqueio,
       p_dia_inteiro: diaInteiro,
       p_horario_inicio: horarioInicio,
       p_horario_fim: horarioFim,
       p_motivo: motivo,
-    },
-  );
+    });
 
-  botaoEnviar.disabled = false;
+    if (error) {
+      throw error;
+    }
 
-  if (error) {
-    console.error("Erro ao criar bloqueio:", error);
-    mensagemBloqueio.textContent = error.message;
-    return;
+    if (!bloqueioId) {
+      throw new Error("Resposta de criação incompleta.");
+    }
+
+    formularioBloqueio.reset();
+    campoBloqueioData.value = dataHoje;
+
+    if (perfilUsuario.tipo === "barbeiro") {
+      selectBloqueioBarbeiro.value = perfilUsuario.barbeiro_id;
+    }
+
+    const listaAtualizada = await carregarBloqueios();
+    mensagemBloqueio.textContent = listaAtualizada
+      ? "Bloqueio adicionado com sucesso!"
+      : "Bloqueio adicionado. Use Atualizar para conferir a lista.";
+  } catch (erro) {
+    console.error("Erro ao criar bloqueio:", erro);
+    mensagemBloqueio.textContent = textoErroBloqueio(
+      erro,
+      "Não foi possível confirmar o resultado. Atualize a lista antes de tentar novamente.",
+    );
+  } finally {
+    salvandoBloqueio = false;
+    botaoSalvarBloqueio.disabled = false;
+    botaoSalvarBloqueio.textContent = "Adicionar bloqueio";
+
+    for (const campo of campos) {
+      campo.disabled = false;
+    }
+
+    atualizarCamposHorarioBloqueio();
   }
-
-  console.log("Bloqueio criado:", bloqueioId);
-
-  mensagemBloqueio.textContent = "Bloqueio adicionado com sucesso!";
-
-  formularioBloqueio.reset();
-  campoBloqueioData.value = dataHoje;
-
-  if (perfilUsuario.tipo === "barbeiro") {
-    selectBloqueioBarbeiro.value = perfilUsuario.barbeiro_id;
-  }
-
-  atualizarCamposHorarioBloqueio();
 });
 
 atualizarCamposHorarioBloqueio();
-
 iniciarAgenda();

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=4" />
 
     <script
       src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
@@ -13,11 +13,11 @@
 
     <script src="js/supabase.js?v=3" defer></script>
     <script src="js/planos.js" defer></script>
-    <script src="js/agenda.js?v=3" defer></script>
+    <script src="js/agenda.js?v=5" defer></script>
 
     <title>Agenda | Barber House</title>
   </head>
-  <body>
+  <body class="pagina-painel">
     <header class="cabecalho">
       <a href="index.html" class="logo">Barber House</a>
       <nav class="menu">
@@ -33,32 +33,44 @@
         <p>Acompanhe os horários e atendimentos da equipe.</p>
       </section>
       <div class="conteudo-painel">
-        <section class="painel-agenda">
-          <div class="filtros-agenda">
-            <div class="campo">
-              <label for="filtro-data">Data</label>
-              <input type="date" id="filtro-data" />
-            </div>
+        <div class="coluna-agenda">
+          <section class="painel-agenda">
+            <div class="filtros-agenda">
+              <div class="campo">
+                <label for="filtro-data">Data</label>
+                <input type="date" id="filtro-data" />
+              </div>
 
-            <div class="campo">
-              <label for="filtro-barbeiro">Barbeiro</label>
-              <select name="filtro-barbeiro" id="filtro-barbeiro">
-                <option value="">Todos os barbeiros</option>
-              </select>
+              <div class="campo">
+                <label for="filtro-barbeiro">Barbeiro</label>
+                <select name="filtro-barbeiro" id="filtro-barbeiro">
+                  <option value="">Todos os barbeiros</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label for="filtro-status">Status</label>
+                <select name="filtro-status" id="filtro-status">
+                  <option value="">Todos os status</option>
+                  <option value="agendado">Agendados</option>
+                  <option value="concluido">Concluído</option>
+                  <option value="cancelado">Cancelado</option>
+                </select>
+              </div>
             </div>
-            <div class="campo">
-              <label for="filtro-status">Status</label>
-              <select name="filtro-status" id="filtro-status">
-                <option value="">Todos os status</option>
-                <option value="agendado">Agendados</option>
-                <option value="concluido">Concluído</option>
-                <option value="cancelado">Cancelado</option>
-              </select>
+            <p id="resumo-agenda" class="resumo-agenda"></p>
+            <div id="lista-agendamentos" class="lista-agendamentos"></div>
+          </section>
+
+          <section class="painel-ranking">
+            <div class="cabecalho-ranking">
+              <p class="destaque">DESEMPENHO DO MÊS</p>
+              <h2>Ranking dos barbeiros</h2>
             </div>
-          </div>
-          <p id="resumo-agenda" class="resumo-agenda"></p>
-          <div id="lista-agendamentos" class="lista-agendamentos"></div>
-        </section>
+            <div id="lista-ranking" class="lista-ranking">
+              <p class="agenda-vazia">Carregando ranking...</p>
+            </div>
+          </section>
+        </div>
 
         <section class="painel-bloqueios">
           <div class="cabecalho-bloqueios">
@@ -68,7 +80,7 @@
           </div>
 
           <form id="form-bloqueio">
-            <div class="campo" id="campo-bloqueio-barbeiro">
+            <div class="campo campo-completo" id="campo-bloqueio-barbeiro">
               <label for="bloqueio-barbeiro">Barbeiro</label>
 
               <select id="bloqueio-barbeiro" required>
@@ -76,12 +88,12 @@
               </select>
             </div>
 
-            <div class="campo">
+            <div class="campo campo-completo">
               <label for="bloqueio-data">Data</label>
               <input type="date" id="bloqueio-data" required />
             </div>
 
-            <div class="campo campo-checkbox">
+            <div class="campo campo-checkbox campo-completo">
               <label for="bloqueio-dia-inteiro">
                 <input type="checkbox" id="bloqueio-dia-inteiro" />
                 Bloquear o dia inteiro
@@ -108,23 +120,18 @@
               />
             </div>
 
-            <button type="submit">Adicionar bloqueio</button>
+            <button type="submit" id="salvar-bloqueio" disabled>Adicionar bloqueio</button>
 
             <p id="mensagem-bloqueio" aria-live="polite"></p>
           </form>
 
-          <div id="lista-bloqueios" class="lista-bloqueios">
-            <p class="agenda-vazia">Carregando bloqueios...</p>
+          <div class="cabecalho-lista-bloqueios">
+            <h3>Próximos bloqueios</h3>
+            <button type="button" id="atualizar-bloqueios" class="botao-secundario">Atualizar</button>
           </div>
-        </section>
 
-        <section class="painel-ranking">
-          <div class="cabecalho-ranking">
-            <p class="destaque">DESEMPENHO DO MÊS</p>
-            <h2>Ranking dos barbeiros</h2>
-          </div>
-          <div id="lista-ranking" class="lista-ranking">
-            <p class="agenda-vazia">Carregando ranking...</p>
+          <div id="lista-bloqueios" class="lista-bloqueios" aria-live="polite" aria-busy="true">
+            <p class="agenda-vazia">Carregando bloqueios...</p>
           </div>
         </section>
       </div>
@@ -196,22 +203,24 @@
 
         <p id="servico-base-conclusao"></p>
 
+        <p>Os adicionais só geram pontos quando estão incluídos no plano do cliente.</p>
+
         <fieldset>
           <legend>Teve algum serviço adicional?</legend>
 
           <label>
             <input type="checkbox" name="adicionais" value="pezinho" />
-            Pezinho (+10 pontos)
+            Pezinho
           </label>
 
           <label>
             <input type="checkbox" name="adicionais" value="barba" />
-            Barba (+20 pontos)
+            Barba
           </label>
 
           <label>
             <input type="checkbox" name="adicionais" value="sobrancelha" />
-            Sobrancelha (+10 pontos)
+            Sobrancelha
           </label>
         </fieldset>
 

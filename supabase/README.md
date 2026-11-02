@@ -15,6 +15,9 @@ A migração inicial reconstrói os objetos da aplicação e seus privilégios. 
 | `migrations/20261031010000_conclusao_com_adicionais.sql` | Registro dos adicionais e validação do plano na conclusão. |
 | `migrations/20261031020000_bloquear_conclusao_futura.sql` | Impede concluir uma reserva antes da data agendada. |
 | `migrations/20261031030000_planos_vigencia_30_dias.sql` | Vigência por pagamento, ativação e renovação de 30 dias. |
+| `migrations/20261102000000_pontos_por_cobertura.sql` | Pontos somente por componentes realizados e cobertos, sobrancelha a R$ 10 e cobrança de adicionais avulsos. |
+| `migrations/20261102010000_catalogo_cinco_planos.sql` | Catálogo de cinco planos com preços e coberturas confirmados. |
+| `consultas/aplicar_cinco_planos.sql` | Instalador manual das duas correções anteriores em uma única transação para o banco que já usa vigências de 30 dias. |
 | `snapshots/20261025_funcoes.sql` | As 16 definições exportadas, com corpos preservados. |
 | `snapshots/20261025_metadados.json` | Estrutura e permissões extraídas dos catálogos do PostgreSQL. |
 | `snapshots/20261025_politicas_fornecidas.sql` | As duas políticas fornecidas inicialmente pelo autor, também confirmadas no export de metadados. |
@@ -48,9 +51,29 @@ Os snapshots SQL e JSON contêm definições da estrutura. A migração de vigê
 - O trigger `trg_validar_novo_agendamento` roda antes de cada inserção e valida expediente, bloqueios e sobreposição.
 - O trigger `trg_registrar_atendimento_concluido` registra a conclusão no histórico, protegido por uma chave única de agendamento.
 - As funções do painel verificam perfil ativo e restringem ações ao administrador ou ao barbeiro responsável.
-- O ranking considera somente os atendimentos de plano concluídos no mês, no fuso `America/Sao_Paulo`. Pontos de avulsos são zerados na conclusão.
+- O ranking considera somente os atendimentos de plano concluídos no mês, no fuso `America/Sao_Paulo`. Novos avulsos têm zero pontos no agendamento e na conclusão.
 - Os adicionais de pezinho, barba e sobrancelha ficam registrados; itens já incluídos no serviço base são recusados.
 - A conclusão revalida a assinatura e o período pago para a data atual. Reservas futuras não podem ser concluídas.
+
+### Cobertura e pontuação
+
+O catálogo confirmado na migração `20261102010000_catalogo_cinco_planos.sql` é:
+
+| Plano | Valor por 30 dias | Componentes incluídos | Pontos ao realizar todos |
+| --- | --- | --- | --- |
+| Cabelo | R$ 59,90 | Corte | 40 |
+| Cabelo e Barba | R$ 89,90 | Corte e barba | 60 |
+| Cabelo e Sobrancelha | R$ 79,90 | Corte e sobrancelha | 50 |
+| Cabelo, Barba e Sobrancelha | R$ 99,90 | Corte, barba e sobrancelha | 70 |
+| Barba | R$ 49,90 | Barba | 20 |
+
+Os nomes anteriores Essencial, Clássico e Premium são atualizados mantendo seus IDs: Cabelo, Cabelo e Sobrancelha, e o plano completo, respectivamente. Os dois planos adicionais são cadastrados sem apagar assinaturas. O valor de um pagamento antigo permanece registrado, mesmo quando o catálogo muda; novas ativações e renovações usam o preço atual. O código de cada plano evita duplicações quando a atualização é repetida. Planos ativos desconhecidos ou duplicados interrompem a atualização para revisão.
+
+Cada componente realizado e coberto pontua uma única vez: corte 40, barba 20 e sobrancelha 10. No plano completo, um atendimento de somente barba gera 20 pontos. Componentes avulsos não pontuam, mesmo para um cliente com plano ativo. Pezinho fica fora da cobertura dos cinco planos. Combos com pigmentação pontuam apenas pelos componentes cobertos que contêm.
+
+A sobrancelha avulsa custa R$ 10. O combo Corte + Sobrancelha que estava em zero passa a R$ 40. Descontos e valores são calculados no banco pela cobertura do plano; a prévia no navegador usa os dados de `listar_agendamentos_painel_v2`. Adicionais fora da cobertura são somados ao valor do atendimento na conclusão, usando o preço do catálogo. Concluir um atendimento não processa um pagamento bancário.
+
+As novas funções preservam as validações de acesso, pagamento e vigência. Atendimentos já concluídos não são recalculados. Reservas existentes mantêm o preço base registrado; a nova regra de pontos é aplicada quando forem concluídas.
 
 
 ## Ativação e renovação por período
@@ -72,7 +95,7 @@ A interface deve gerar um UUID por pagamento com `crypto.randomUUID()` e manter 
 
 A função usa bloqueios durante o registro e permite várias renovações no mesmo mês. A troca de plano durante uma vigência ativa permanece bloqueada, pois proporcionalidade e mudança de cobertura ainda não foram definidas.
 
-O cadastro de ativação/renovação na interface, a cobrança dos adicionais e o fluxo de agendamento com renovação pendente continuam sendo etapas separadas. O agendamento online ainda exige cobertura para a data selecionada.
+O painel permite ativação e renovação após confirmar o recebimento do pagamento. O fluxo de agendamento com renovação pendente continua sendo uma etapa separada: o agendamento online ainda exige cobertura para a data selecionada.
 
 ## Preparar um banco de desenvolvimento vazio
 
@@ -111,6 +134,10 @@ A verificação confere tabelas, colunas, constraints, índices, identidades, po
 - Liberação de horário após cancelamento.
 
 `validar_planos_30_dias.cjs` aplica as migrations seguintes com dados fictícios e executa outras 36 verificações: preservação do legado, novas vigências, renovação antecipada e após vencimento, várias renovações no mesmo mês, agendamento na virada do mês, validação na conclusão, repetição da operação, normalização de telefone, preços e permissões. Uma verificação também confirma que pagamentos legados desconhecidos interrompem a migração com rollback.
+
+`validar_pontos_cobertura.cjs` verifica a regra mais recente em outro banco descartável: componentes cobertos, adicionais avulsos, pigmentação, preços, prévia do painel, acesso e preservação do histórico. Também executa prévias com a função JavaScript real do formulário. `validar_bloqueios_painel.cjs` cobre os fluxos do painel de bloqueios com DOM e Supabase simulados.
+
+`validar_cinco_planos.cjs` verifica o catálogo atual, os cinco preços, cada cobertura, a preservação dos pagamentos e assinaturas, renovação com novo valor, pontuação e cobrança de serviços e adicionais, os cards públicos, o seletor real do painel e os caminhos de instalação com ou sem a correção anterior de pontos.
 
 Essa validação não cobre emissão de tokens pelo Supabase Auth, chamadas pela API HTTP, interface no navegador ou concorrência entre conexões. Essas etapas continuam pendentes em um projeto Supabase de desenvolvimento. Os testes não se conectam ao projeto remoto.
 

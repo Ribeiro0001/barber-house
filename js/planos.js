@@ -3,7 +3,9 @@ const campoNomePlano = document.getElementById("nome-cliente-plano");
 const campoTelefonePlano = document.getElementById("telefone-cliente-plano");
 const selectPlanoCliente = document.getElementById("plano-cliente");
 const campoFormaPlano = document.getElementById("forma-pagamento-plano");
-const pagamentoPlanoRecebido = document.getElementById("pagamento-plano-recebido");
+const pagamentoPlanoRecebido = document.getElementById(
+  "pagamento-plano-recebido",
+);
 const resumoPlano = document.getElementById("resumo-plano");
 const mensagemPlano = document.getElementById("mensagem-plano");
 const botaoSalvarPlano = document.getElementById("salvar-plano");
@@ -40,8 +42,17 @@ function novaChavePagamentoPlano() {
     return byte.toString(16).padStart(2, "0");
   }).join("");
 
-  return hex.slice(0, 8) + "-" + hex.slice(8, 12) + "-" +
-    hex.slice(12, 16) + "-" + hex.slice(16, 20) + "-" + hex.slice(20);
+  return (
+    hex.slice(0, 8) +
+    "-" +
+    hex.slice(8, 12) +
+    "-" +
+    hex.slice(12, 16) +
+    "-" +
+    hex.slice(16, 20) +
+    "-" +
+    hex.slice(20)
+  );
 }
 
 function lerOperacaoPlano() {
@@ -52,7 +63,8 @@ function lerOperacaoPlano() {
   }
 
   const operacao = JSON.parse(texto);
-  const uuidValido = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const uuidValido =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
   if (
     operacao.versao !== 1 ||
@@ -221,7 +233,8 @@ selectPlanoCliente.addEventListener("change", function () {
   const opcao = selectPlanoCliente.options[selectPlanoCliente.selectedIndex];
 
   resumoPlano.textContent = selectPlanoCliente.value
-    ? "Valor a registrar: " + moedaPlano.format(Number(opcao.dataset.preco)) +
+    ? "Valor a registrar: " +
+      moedaPlano.format(Number(opcao.dataset.preco)) +
       ". Serão acrescentados 30 dias de validade."
     : "";
 });
@@ -268,7 +281,8 @@ formularioPlano.addEventListener("submit", async function (evento) {
         return;
       }
 
-      const opcao = selectPlanoCliente.options[selectPlanoCliente.selectedIndex];
+      const opcao =
+        selectPlanoCliente.options[selectPlanoCliente.selectedIndex];
 
       operacaoPlanoPendente = {
         versao: 1,
@@ -360,15 +374,25 @@ formularioPlano.addEventListener("submit", async function (evento) {
     pagamentoConfirmado = true;
 
     const texto =
-      (resultado.renovacao_antecipada ? "Renovação registrada. " : "Plano ativado. ") +
-      resultado.plano + " — " + moedaPlano.format(Number(resultado.valor_pago)) +
-      ". Período: " + formatarDataPlano(resultado.data_inicio_vigencia) +
-      " até " + formatarDataPlano(resultado.data_fim_vigencia) + ".";
+      (resultado.renovacao_antecipada
+        ? "Renovação registrada. "
+        : "Plano ativado. ") +
+      resultado.plano +
+      " — " +
+      moedaPlano.format(Number(resultado.valor_pago)) +
+      ". Período: " +
+      formatarDataPlano(resultado.data_inicio_vigencia) +
+      " até " +
+      formatarDataPlano(resultado.data_fim_vigencia) +
+      ".";
 
     try {
       limparOperacaoPlano(operacao.chave);
     } catch (erro) {
-      console.error("Pagamento registrado, mas não foi possível limpar o registro local:", erro);
+      console.error(
+        "Pagamento registrado, mas não foi possível limpar o registro local:",
+        erro,
+      );
       registroPlanoPreparado = false;
       mensagemPlano.textContent =
         texto + " Recarregue a página antes de iniciar outro pagamento.";
